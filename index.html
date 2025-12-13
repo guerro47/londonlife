@@ -2,57 +2,120 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>London Life - Author Command Center | Artem Artemenko</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="theme-color" content="#ff6b35">
+    <meta name="description" content="London Life - Be Good To People by Artem Artemenko. Author Command Center for managing content, social media, and book sales.">
 </head>
 <body>
-    <!-- Splash Screen -->
-    <section id="splash" class="splash-screen">
-        <div class="video-background">
-            <div class="video-placeholder" id="bgVideo">
-                <div class="video-overlay"></div>
-                <img src="IMG_1218.jpeg" alt="London Life Cover" class="cover-bg">
-            </div>
+    <!-- HD Splash Screen -->
+    <section id="splash" class="splash-screen-hd">
+        <div class="splash-bg-container">
+            <div class="splash-bg-image"></div>
+            <div class="splash-particles" id="particles"></div>
+            <div class="splash-gradient-overlay"></div>
+            <div class="splash-noise-overlay"></div>
         </div>
-        <div class="splash-content">
-            <div class="book-cover-container">
-                <img src="IMG_1218.jpeg" alt="London Life - Be Good To People" class="book-cover-main">
-                <div class="book-glow"></div>
+        
+        <div class="splash-content-hd">
+            <div class="splash-logo-badge">
+                <span>ARTEM ARTEMENKO</span>
             </div>
-            <h1 class="title-main">LONDON LIFE</h1>
-            <p class="tagline">Be Good To People</p>
-            <p class="author-name">Artem Artemenko</p>
-            <button class="enter-btn" onclick="enterCommandCenter()">
-                <span>Enter Command Center</span>
-                <i class="fas fa-arrow-right"></i>
+            
+            <div class="book-showcase">
+                <div class="book-3d-container">
+                    <div class="book-shadow"></div>
+                    <div class="book-3d">
+                        <div class="book-spine"></div>
+                        <div class="book-cover">
+                            <img src="IMG_1218.jpeg" alt="London Life - Be Good To People" class="book-cover-image">
+                        </div>
+                        <div class="book-pages"></div>
+                    </div>
+                </div>
+                <div class="book-reflection"></div>
+            </div>
+            
+            <div class="splash-text-content">
+                <h1 class="splash-title">
+                    <span class="title-word">LONDON</span>
+                    <span class="title-word">LIFE</span>
+                </h1>
+                <div class="splash-subtitle">
+                    <span class="subtitle-line"></span>
+                    <p>Be Good To People</p>
+                    <span class="subtitle-line"></span>
+                </div>
+                <p class="splash-author">A Memoir by <strong>Artem Artemenko</strong></p>
+                <p class="splash-tagline">A journey through betrayal, resilience, and the transformative power of forgiveness in the streets of London.</p>
+            </div>
+            
+            <button class="enter-btn-hd" onclick="enterCommandCenter()">
+                <span class="btn-text">Enter Command Center</span>
+                <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                <span class="btn-glow"></span>
             </button>
+            
+            <div class="splash-stats">
+                <div class="stat-item">
+                    <span class="stat-value">1.2K+</span>
+                    <span class="stat-label">Copies Sold</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-value">4.8</span>
+                    <span class="stat-label">Rating</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-value">15K+</span>
+                    <span class="stat-label">Followers</span>
+                </div>
+            </div>
         </div>
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
+        
+        <div class="scroll-indicator-hd">
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+            <p>Scroll or click to enter</p>
+        </div>
+        
+        <div class="splash-social-links">
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-amazon"></i></a>
         </div>
     </section>
 
     <!-- Main Command Center -->
     <main id="commandCenter" class="command-center">
+        <!-- Mobile Navigation Toggle -->
+        <button class="mobile-nav-toggle" onclick="toggleMobileNav()">
+            <i class="fas fa-bars"></i>
+        </button>
+        
         <!-- Navigation -->
-        <nav class="main-nav">
+        <nav class="main-nav" id="mainNav">
             <div class="nav-brand">
                 <img src="unnamed.jpg" alt="London Life" class="nav-logo">
                 <span>LONDON LIFE</span>
             </div>
             <ul class="nav-links">
-                <li><a href="#dashboard" class="active">Dashboard</a></li>
-                <li><a href="#content">Content</a></li>
-                <li><a href="#social">Social</a></li>
-                <li><a href="#videos">Videos</a></li>
-                <li><a href="#analytics">Analytics</a></li>
-                <li><a href="#orders">Orders</a></li>
+                <li><a href="#dashboard" class="active" onclick="scrollToSection('dashboard')">Dashboard</a></li>
+                <li><a href="#media" onclick="scrollToSection('media')">Media</a></li>
+                <li><a href="#content" onclick="scrollToSection('content')">Content</a></li>
+                <li><a href="#social" onclick="scrollToSection('social')">Social</a></li>
+                <li><a href="#videos" onclick="scrollToSection('videos')">Videos</a></li>
+                <li><a href="#analytics" onclick="scrollToSection('analytics')">Analytics</a></li>
+                <li><a href="#orders" onclick="scrollToSection('orders')">Orders</a></li>
             </ul>
             <div class="nav-profile">
-                <span>Artem Artemenko</span>
+                <span class="nav-profile-name">Artem Artemenko</span>
                 <div class="profile-avatar">AA</div>
                 <button class="logout-btn" onclick="handleLogout()" title="Sign Out">
                     <i class="fas fa-sign-out-alt"></i>
@@ -72,7 +135,7 @@
                     <div class="stat-icon"><i class="fas fa-book"></i></div>
                     <div class="stat-info">
                         <h3>Book Sales</h3>
-                        <p class="stat-number">1,247</p>
+                        <p class="stat-number" data-count="1247">0</p>
                         <span class="stat-change positive">+12% this month</span>
                     </div>
                 </div>
@@ -80,7 +143,7 @@
                     <div class="stat-icon"><i class="fas fa-users"></i></div>
                     <div class="stat-info">
                         <h3>Followers</h3>
-                        <p class="stat-number">15.2K</p>
+                        <p class="stat-number" data-count="15200">0</p>
                         <span class="stat-change positive">+340 new</span>
                     </div>
                 </div>
@@ -88,7 +151,7 @@
                     <div class="stat-icon"><i class="fas fa-eye"></i></div>
                     <div class="stat-info">
                         <h3>Views</h3>
-                        <p class="stat-number">89.4K</p>
+                        <p class="stat-number" data-count="89400">0</p>
                         <span class="stat-change positive">+28% this week</span>
                     </div>
                 </div>
@@ -106,56 +169,163 @@
             <div class="quick-actions">
                 <h3>Quick Actions</h3>
                 <div class="action-buttons">
+                    <button class="action-btn" onclick="openModal('aiPostModal')">
+                        <i class="fas fa-robot"></i> AI Post Generator
+                    </button>
                     <button class="action-btn" onclick="openModal('postModal')">
                         <i class="fas fa-plus"></i> New Post
+                    </button>
+                    <button class="action-btn" onclick="openModal('uploadModal')">
+                        <i class="fas fa-cloud-upload-alt"></i> Upload Media
                     </button>
                     <button class="action-btn" onclick="openModal('videoModal')">
                         <i class="fas fa-video"></i> Create Video
                     </button>
-                    <button class="action-btn" onclick="openModal('emailModal')">
-                        <i class="fas fa-envelope"></i> Send Newsletter
-                    </button>
-                    <button class="action-btn" onclick="openModal('eventModal')">
-                        <i class="fas fa-calendar"></i> Schedule Event
-                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Media Library Section -->
+        <section id="media" class="section media-section">
+            <div class="section-header">
+                <h2><i class="fas fa-images"></i> Media Library</h2>
+                <p>Manage your images, videos, and promotional materials.</p>
+            </div>
+
+            <!-- Upload Area -->
+            <div class="media-upload-area" id="mediaDropZone">
+                <div class="upload-content">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h4>Drag & Drop Files Here</h4>
+                    <p>or click to browse</p>
+                    <span class="upload-formats">Supports: JPG, PNG, GIF, MP4, WebM (Max 50MB)</span>
+                    <input type="file" id="mediaUploadInput" multiple accept="image/*,video/*" style="display:none">
+                </div>
+                <div class="upload-progress" id="uploadProgress" style="display:none">
+                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                    <span class="progress-text">Uploading...</span>
                 </div>
             </div>
 
-            <!-- Image Gallery Placeholders -->
-            <div class="gallery-section">
-                <h3>Media Gallery</h3>
-                <div class="gallery-grid">
-                    <div class="gallery-item featured">
-                        <img src="IMG_1218.jpeg" alt="London Life Cover">
-                        <div class="gallery-overlay">
-                            <span>Book Cover - Front</span>
+            <!-- Media Filters -->
+            <div class="media-filters">
+                <button class="filter-btn active" data-filter="all">All Media</button>
+                <button class="filter-btn" data-filter="images">Images</button>
+                <button class="filter-btn" data-filter="videos">Videos</button>
+                <button class="filter-btn" data-filter="covers">Book Covers</button>
+                <div class="media-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search media..." id="mediaSearch">
+                </div>
+            </div>
+
+            <!-- Media Grid -->
+            <div class="media-grid" id="mediaGrid">
+                <div class="media-item" data-type="covers" data-id="1">
+                    <div class="media-thumbnail">
+                        <img src="IMG_1218.jpeg" alt="Book Cover Front">
+                        <div class="media-overlay">
+                            <button class="media-action" onclick="viewMedia(1)"><i class="fas fa-expand"></i></button>
+                            <button class="media-action" onclick="editMedia(1)"><i class="fas fa-edit"></i></button>
+                            <button class="media-action" onclick="deleteMedia(1)"><i class="fas fa-trash"></i></button>
                         </div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="IMG_5254.jpeg" alt="London Life Held">
-                        <div class="gallery-overlay">
-                            <span>Promotional Shot</span>
+                    <div class="media-info">
+                        <span class="media-name">Book Cover - Front</span>
+                        <span class="media-size">2.2 MB</span>
+                    </div>
+                    <label class="media-select">
+                        <input type="checkbox" class="media-checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="media-item" data-type="images" data-id="2">
+                    <div class="media-thumbnail">
+                        <img src="IMG_5254.jpeg" alt="Promotional Shot">
+                        <div class="media-overlay">
+                            <button class="media-action" onclick="viewMedia(2)"><i class="fas fa-expand"></i></button>
+                            <button class="media-action" onclick="editMedia(2)"><i class="fas fa-edit"></i></button>
+                            <button class="media-action" onclick="deleteMedia(2)"><i class="fas fa-trash"></i></button>
                         </div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="IMG_5255.jpeg" alt="London Life">
-                        <div class="gallery-overlay">
-                            <span>Cover Variant 1</span>
+                    <div class="media-info">
+                        <span class="media-name">Promotional Shot</span>
+                        <span class="media-size">3.1 MB</span>
+                    </div>
+                    <label class="media-select">
+                        <input type="checkbox" class="media-checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="media-item" data-type="covers" data-id="3">
+                    <div class="media-thumbnail">
+                        <img src="IMG_5255.jpeg" alt="Cover Variant">
+                        <div class="media-overlay">
+                            <button class="media-action" onclick="viewMedia(3)"><i class="fas fa-expand"></i></button>
+                            <button class="media-action" onclick="editMedia(3)"><i class="fas fa-edit"></i></button>
+                            <button class="media-action" onclick="deleteMedia(3)"><i class="fas fa-trash"></i></button>
                         </div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="IMG_5692.jpeg" alt="London Life Back Cover">
-                        <div class="gallery-overlay">
-                            <span>Back Cover</span>
+                    <div class="media-info">
+                        <span class="media-name">Cover Variant 1</span>
+                        <span class="media-size">3.4 MB</span>
+                    </div>
+                    <label class="media-select">
+                        <input type="checkbox" class="media-checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="media-item" data-type="covers" data-id="4">
+                    <div class="media-thumbnail">
+                        <img src="IMG_5692.jpeg" alt="Back Cover">
+                        <div class="media-overlay">
+                            <button class="media-action" onclick="viewMedia(4)"><i class="fas fa-expand"></i></button>
+                            <button class="media-action" onclick="editMedia(4)"><i class="fas fa-edit"></i></button>
+                            <button class="media-action" onclick="deleteMedia(4)"><i class="fas fa-trash"></i></button>
                         </div>
                     </div>
-                    <div class="gallery-item">
-                        <img src="unnamed.jpg" alt="Full Book Display">
-                        <div class="gallery-overlay">
-                            <span>Full Display</span>
+                    <div class="media-info">
+                        <span class="media-name">Back Cover</span>
+                        <span class="media-size">1.9 MB</span>
+                    </div>
+                    <label class="media-select">
+                        <input type="checkbox" class="media-checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <div class="media-item" data-type="images" data-id="5">
+                    <div class="media-thumbnail">
+                        <img src="unnamed.jpg" alt="Full Display">
+                        <div class="media-overlay">
+                            <button class="media-action" onclick="viewMedia(5)"><i class="fas fa-expand"></i></button>
+                            <button class="media-action" onclick="editMedia(5)"><i class="fas fa-edit"></i></button>
+                            <button class="media-action" onclick="deleteMedia(5)"><i class="fas fa-trash"></i></button>
                         </div>
+                    </div>
+                    <div class="media-info">
+                        <span class="media-name">Full Display</span>
+                        <span class="media-size">139 KB</span>
+                    </div>
+                    <label class="media-select">
+                        <input type="checkbox" class="media-checkbox">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <!-- Add New Media Card -->
+                <div class="media-item add-new" onclick="document.getElementById('mediaUploadInput').click()">
+                    <div class="add-media-content">
+                        <i class="fas fa-plus"></i>
+                        <span>Add Media</span>
                     </div>
                 </div>
+            </div>
+
+            <!-- Bulk Actions -->
+            <div class="bulk-actions" id="bulkActions" style="display:none">
+                <span class="selected-count">0 selected</span>
+                <button class="bulk-btn" onclick="bulkDownload()"><i class="fas fa-download"></i> Download</button>
+                <button class="bulk-btn" onclick="bulkDelete()"><i class="fas fa-trash"></i> Delete</button>
+                <button class="bulk-btn cancel" onclick="clearSelection()"><i class="fas fa-times"></i> Cancel</button>
             </div>
         </section>
 
@@ -187,7 +357,7 @@
 
                 <div class="content-card">
                     <h4>Press Kit</h4>
-                    <div class="file-upload">
+                    <div class="file-upload" onclick="document.getElementById('pressKit').click()">
                         <i class="fas fa-cloud-upload-alt"></i>
                         <p>Drag & drop files or click to upload</p>
                         <input type="file" id="pressKit" multiple>
@@ -200,7 +370,7 @@
         <section id="social" class="section social-section">
             <div class="section-header">
                 <h2><i class="fas fa-share-alt"></i> Social Media Command</h2>
-                <p>Post to all platforms from one place.</p>
+                <p>Post to all platforms from one place with AI assistance.</p>
             </div>
 
             <div class="social-composer">
@@ -236,10 +406,30 @@
 
                 <div class="composer-body">
                     <textarea id="postContent" placeholder="What's on your mind? Share your London Life story..."></textarea>
+                    
+                    <!-- AI Assist Button -->
+                    <div class="ai-assist-bar">
+                        <button class="ai-assist-btn" onclick="openAIAssist()">
+                            <i class="fas fa-magic"></i> AI Assist
+                        </button>
+                        <div class="ai-quick-actions">
+                            <button onclick="aiGenerateCaption('inspiring')">Inspiring</button>
+                            <button onclick="aiGenerateCaption('promotional')">Promotional</button>
+                            <button onclick="aiGenerateCaption('storytelling')">Story</button>
+                            <button onclick="aiGenerateCaption('engaging')">Engaging</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Attached Media Preview -->
+                    <div class="attached-media" id="attachedMedia" style="display:none">
+                        <div class="attached-items" id="attachedItems"></div>
+                    </div>
+                    
                     <div class="media-attach">
-                        <button class="attach-btn"><i class="fas fa-image"></i> Add Image</button>
+                        <button class="attach-btn" onclick="openMediaPicker()"><i class="fas fa-image"></i> Add Image</button>
                         <button class="attach-btn"><i class="fas fa-video"></i> Add Video</button>
                         <button class="attach-btn"><i class="fas fa-link"></i> Add Link</button>
+                        <button class="attach-btn" onclick="addHashtags()"><i class="fas fa-hashtag"></i> Hashtags</button>
                     </div>
                 </div>
 
@@ -253,16 +443,19 @@
                         </label>
                         <input type="datetime-local" id="scheduleTime" class="hidden">
                     </div>
-                    <button class="post-btn" onclick="publishPost()">
-                        <i class="fas fa-paper-plane"></i> Publish
-                    </button>
+                    <div class="post-actions-group">
+                        <button class="draft-btn" onclick="saveDraft()"><i class="fas fa-save"></i> Save Draft</button>
+                        <button class="post-btn" onclick="publishPost()">
+                            <i class="fas fa-paper-plane"></i> Publish
+                        </button>
+                    </div>
                 </div>
             </div>
 
             <!-- Scheduled Posts -->
             <div class="scheduled-posts">
                 <h4>Scheduled Posts</h4>
-                <div class="post-queue">
+                <div class="post-queue" id="postQueue">
                     <div class="queued-post">
                         <div class="post-preview">
                             <img src="IMG_5254.jpeg" alt="Post preview">
@@ -285,14 +478,13 @@
             </div>
         </section>
 
-        <!-- Videos & Reels Section -->
+        <!-- Videos Section -->
         <section id="videos" class="section videos-section">
             <div class="section-header">
                 <h2><i class="fas fa-film"></i> Video & Reels Studio</h2>
-                <p>Create AI-generated videos and reels with Grok, Runway, and Pika.</p>
+                <p>Create AI-generated videos and reels.</p>
             </div>
 
-            <!-- AI Video Generation -->
             <div class="ai-video-generator">
                 <h3>AI Video Generation</h3>
                 <div class="generator-tabs">
@@ -308,12 +500,12 @@
                         <textarea id="videoPrompt" placeholder="Describe your video vision...">Cinematic London cityscape at dusk, rain-slicked streets reflecting neon lights, a solitary figure walking with purpose, camera slowly panning to reveal the iconic London skyline, moody atmospheric lighting, film grain, 4K quality</textarea>
                         
                         <div class="prompt-presets">
-                            <h5>Quick Prompts for London Life:</h5>
-                            <button class="preset-btn" onclick="setPrompt('london-rain')">London Rain Scene</button>
+                            <h5>Quick Prompts:</h5>
+                            <button class="preset-btn" onclick="setPrompt('london-rain')">London Rain</button>
                             <button class="preset-btn" onclick="setPrompt('book-reveal')">Book Reveal</button>
-                            <button class="preset-btn" onclick="setPrompt('author-intro')">Author Introduction</button>
-                            <button class="preset-btn" onclick="setPrompt('testimonial')">Testimonial Background</button>
-                            <button class="preset-btn" onclick="setPrompt('quote-card')">Animated Quote</button>
+                            <button class="preset-btn" onclick="setPrompt('author-intro')">Author Intro</button>
+                            <button class="preset-btn" onclick="setPrompt('testimonial')">Testimonial BG</button>
+                            <button class="preset-btn" onclick="setPrompt('quote-card')">Quote Card</button>
                         </div>
                     </div>
 
@@ -325,13 +517,13 @@
                                 <option value="10" selected>10 seconds</option>
                                 <option value="15">15 seconds</option>
                                 <option value="30">30 seconds</option>
-                                <option value="60">60 seconds (Reel)</option>
+                                <option value="60">60 seconds</option>
                             </select>
                         </div>
                         <div class="setting-group">
                             <label>Aspect Ratio</label>
                             <select id="aspectRatio">
-                                <option value="9:16">9:16 (Reels/TikTok)</option>
+                                <option value="9:16">9:16 (Reels)</option>
                                 <option value="16:9">16:9 (YouTube)</option>
                                 <option value="1:1">1:1 (Square)</option>
                                 <option value="4:5">4:5 (Instagram)</option>
@@ -354,119 +546,36 @@
                 </div>
             </div>
 
-            <!-- Video Placeholders Grid -->
             <div class="video-grid">
                 <h3>Generated Videos</h3>
                 <div class="videos-container">
                     <div class="video-card placeholder">
                         <div class="video-thumbnail">
                             <img src="IMG_1218.jpeg" alt="Video 1">
-                            <div class="play-overlay">
-                                <i class="fas fa-play"></i>
-                            </div>
+                            <div class="play-overlay"><i class="fas fa-play"></i></div>
                             <span class="duration">0:15</span>
                         </div>
                         <div class="video-info">
-                            <h5>London Nights - Background Loop</h5>
+                            <h5>London Nights - Loop</h5>
                             <p>Grok AI | Cinematic</p>
-                            <div class="video-actions">
-                                <button><i class="fas fa-download"></i></button>
-                                <button><i class="fas fa-share"></i></button>
-                                <button><i class="fas fa-edit"></i></button>
-                            </div>
                         </div>
                     </div>
                     <div class="video-card placeholder">
                         <div class="video-thumbnail">
                             <img src="IMG_5692.jpeg" alt="Video 2">
-                            <div class="play-overlay">
-                                <i class="fas fa-play"></i>
-                            </div>
+                            <div class="play-overlay"><i class="fas fa-play"></i></div>
                             <span class="duration">0:30</span>
                         </div>
                         <div class="video-info">
-                            <h5>Book Reveal Animation</h5>
+                            <h5>Book Reveal</h5>
                             <p>Runway ML | Dramatic</p>
-                            <div class="video-actions">
-                                <button><i class="fas fa-download"></i></button>
-                                <button><i class="fas fa-share"></i></button>
-                                <button><i class="fas fa-edit"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="video-card placeholder">
-                        <div class="video-thumbnail">
-                            <img src="IMG_5254.jpeg" alt="Video 3">
-                            <div class="play-overlay">
-                                <i class="fas fa-play"></i>
-                            </div>
-                            <span class="duration">1:00</span>
-                        </div>
-                        <div class="video-info">
-                            <h5>Author Story Reel</h5>
-                            <p>Pika Labs | Documentary</p>
-                            <div class="video-actions">
-                                <button><i class="fas fa-download"></i></button>
-                                <button><i class="fas fa-share"></i></button>
-                                <button><i class="fas fa-edit"></i></button>
-                            </div>
                         </div>
                     </div>
                     <div class="video-card add-new">
                         <div class="add-video-placeholder">
                             <i class="fas fa-plus"></i>
-                            <p>Generate New Video</p>
+                            <p>Generate New</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Background Video Variants -->
-            <div class="background-variants">
-                <h3>Background Video Variants</h3>
-                <p class="variant-desc">Pre-configured prompts for website and social media backgrounds</p>
-                <div class="variant-grid">
-                    <div class="variant-card" onclick="selectVariant('rain')">
-                        <div class="variant-preview" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
-                            <i class="fas fa-cloud-rain"></i>
-                        </div>
-                        <h5>London Rain</h5>
-                        <p>Moody rain on windows</p>
-                    </div>
-                    <div class="variant-card" onclick="selectVariant('skyline')">
-                        <div class="variant-preview" style="background: linear-gradient(135deg, #ff6b35, #1a1a2e);">
-                            <i class="fas fa-city"></i>
-                        </div>
-                        <h5>City Skyline</h5>
-                        <p>London at sunset</p>
-                    </div>
-                    <div class="variant-card" onclick="selectVariant('pages')">
-                        <div class="variant-preview" style="background: linear-gradient(135deg, #2d2d2d, #1a1a1a);">
-                            <i class="fas fa-book-open"></i>
-                        </div>
-                        <h5>Turning Pages</h5>
-                        <p>Book pages flipping</p>
-                    </div>
-                    <div class="variant-card" onclick="selectVariant('lights')">
-                        <div class="variant-preview" style="background: linear-gradient(135deg, #ff9f43, #ee5a24);">
-                            <i class="fas fa-lightbulb"></i>
-                        </div>
-                        <h5>Street Lights</h5>
-                        <p>Bokeh light effects</p>
-                    </div>
-                    <div class="variant-card" onclick="selectVariant('fog')">
-                        <div class="variant-preview" style="background: linear-gradient(135deg, #636e72, #2d3436);">
-                            <i class="fas fa-smog"></i>
-                        </div>
-                        <h5>London Fog</h5>
-                        <p>Mysterious atmosphere</p>
-                    </div>
-                    <div class="variant-card" onclick="selectVariant('abstract')">
-                        <div class="variant-preview" style="background: linear-gradient(135deg, #e17055, #fdcb6e);">
-                            <i class="fas fa-shapes"></i>
-                        </div>
-                        <h5>Abstract Flow</h5>
-                        <p>Orange gradient motion</p>
                     </div>
                 </div>
             </div>
@@ -493,7 +602,7 @@
                     </div>
                 </div>
                 <div class="chart-card">
-                    <h4>Engagement by Platform</h4>
+                    <h4>Engagement</h4>
                     <div class="chart-placeholder">
                         <canvas id="engagementChart"></canvas>
                     </div>
@@ -501,7 +610,7 @@
             </div>
 
             <div class="metrics-breakdown">
-                <h4>Detailed Metrics</h4>
+                <h4>Platform Metrics</h4>
                 <div class="metrics-table">
                     <table>
                         <thead>
@@ -557,59 +666,47 @@
 
             <div class="order-links-grid">
                 <div class="order-link-card amazon">
-                    <div class="retailer-logo">
-                        <i class="fab fa-amazon"></i>
-                    </div>
+                    <div class="retailer-logo"><i class="fab fa-amazon"></i></div>
                     <h4>Amazon</h4>
-                    <input type="url" placeholder="Amazon product link" value="https://amazon.com/dp/B0XXXXXXXXX">
+                    <input type="url" placeholder="Amazon link" value="https://amazon.com/dp/B0XXXXXXXXX">
                     <div class="link-stats">
-                        <span><i class="fas fa-mouse-pointer"></i> 2,890 clicks</span>
-                        <span><i class="fas fa-shopping-bag"></i> 312 orders</span>
+                        <span><i class="fas fa-mouse-pointer"></i> 2,890</span>
+                        <span><i class="fas fa-shopping-bag"></i> 312</span>
                     </div>
-                    <button class="copy-link"><i class="fas fa-copy"></i> Copy Link</button>
+                    <button class="copy-link"><i class="fas fa-copy"></i> Copy</button>
                 </div>
-
-                <div class="order-link-card barnes">
-                    <div class="retailer-logo">
-                        <i class="fas fa-book"></i>
-                    </div>
+                <div class="order-link-card">
+                    <div class="retailer-logo"><i class="fas fa-book"></i></div>
                     <h4>Barnes & Noble</h4>
-                    <input type="url" placeholder="B&N product link">
+                    <input type="url" placeholder="B&N link">
                     <div class="link-stats">
-                        <span><i class="fas fa-mouse-pointer"></i> 456 clicks</span>
-                        <span><i class="fas fa-shopping-bag"></i> 67 orders</span>
+                        <span><i class="fas fa-mouse-pointer"></i> 456</span>
+                        <span><i class="fas fa-shopping-bag"></i> 67</span>
                     </div>
-                    <button class="copy-link"><i class="fas fa-copy"></i> Copy Link</button>
+                    <button class="copy-link"><i class="fas fa-copy"></i> Copy</button>
                 </div>
-
-                <div class="order-link-card direct">
-                    <div class="retailer-logo">
-                        <i class="fas fa-store"></i>
-                    </div>
+                <div class="order-link-card">
+                    <div class="retailer-logo"><i class="fas fa-store"></i></div>
                     <h4>Direct Sales</h4>
-                    <input type="url" placeholder="Your website store link">
+                    <input type="url" placeholder="Your store link">
                     <div class="link-stats">
-                        <span><i class="fas fa-mouse-pointer"></i> 890 clicks</span>
-                        <span><i class="fas fa-shopping-bag"></i> 123 orders</span>
+                        <span><i class="fas fa-mouse-pointer"></i> 890</span>
+                        <span><i class="fas fa-shopping-bag"></i> 123</span>
                     </div>
-                    <button class="copy-link"><i class="fas fa-copy"></i> Copy Link</button>
+                    <button class="copy-link"><i class="fas fa-copy"></i> Copy</button>
                 </div>
-
-                <div class="order-link-card signed">
-                    <div class="retailer-logo">
-                        <i class="fas fa-signature"></i>
-                    </div>
+                <div class="order-link-card">
+                    <div class="retailer-logo"><i class="fas fa-signature"></i></div>
                     <h4>Signed Copies</h4>
-                    <input type="url" placeholder="Signed copy order form">
+                    <input type="url" placeholder="Signed copy form">
                     <div class="link-stats">
-                        <span><i class="fas fa-mouse-pointer"></i> 234 clicks</span>
-                        <span><i class="fas fa-shopping-bag"></i> 45 orders</span>
+                        <span><i class="fas fa-mouse-pointer"></i> 234</span>
+                        <span><i class="fas fa-shopping-bag"></i> 45</span>
                     </div>
-                    <button class="copy-link"><i class="fas fa-copy"></i> Copy Link</button>
+                    <button class="copy-link"><i class="fas fa-copy"></i> Copy</button>
                 </div>
             </div>
 
-            <!-- ISBN & Book Details -->
             <div class="book-details-card">
                 <h4>Book Details</h4>
                 <div class="details-grid">
@@ -618,7 +715,7 @@
                         <input type="text" value="9798893970265" readonly>
                     </div>
                     <div class="detail-item">
-                        <label>Price (USD)</label>
+                        <label>Price</label>
                         <input type="text" value="$19.99">
                     </div>
                     <div class="detail-item">
@@ -632,7 +729,6 @@
                 </div>
             </div>
 
-            <!-- Recent Orders -->
             <div class="recent-orders">
                 <h4>Recent Orders</h4>
                 <div class="orders-list">
@@ -649,7 +745,7 @@
                         <div class="order-icon"><i class="fas fa-box"></i></div>
                         <div class="order-details">
                             <p class="order-id">#LL-2025-0891</p>
-                            <p class="order-customer">Sarah M. - New York, USA</p>
+                            <p class="order-customer">Sarah M. - New York</p>
                         </div>
                         <div class="order-status processing">Processing</div>
                         <div class="order-amount">$24.99</div>
@@ -658,7 +754,7 @@
                         <div class="order-icon"><i class="fas fa-box"></i></div>
                         <div class="order-details">
                             <p class="order-id">#LL-2025-0890</p>
-                            <p class="order-customer">Mike R. - Sydney, AU</p>
+                            <p class="order-customer">Mike R. - Sydney</p>
                         </div>
                         <div class="order-status delivered">Delivered</div>
                         <div class="order-amount">$19.99</div>
@@ -668,7 +764,92 @@
         </section>
     </main>
 
-    <!-- Modals -->
+    <!-- AI Post Generator Modal -->
+    <div id="aiPostModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close-modal" onclick="closeModal('aiPostModal')">&times;</span>
+            <h3><i class="fas fa-robot"></i> AI Post Generator</h3>
+            <p class="modal-desc">Generate engaging social media posts with AI</p>
+            
+            <div class="ai-generator-form">
+                <div class="form-group">
+                    <label>Post Topic</label>
+                    <input type="text" id="aiTopic" placeholder="e.g., Book launch, Author journey, London stories...">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Tone</label>
+                        <select id="aiTone">
+                            <option value="inspiring">Inspiring</option>
+                            <option value="professional">Professional</option>
+                            <option value="casual">Casual</option>
+                            <option value="storytelling">Storytelling</option>
+                            <option value="promotional">Promotional</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Platform</label>
+                        <select id="aiPlatform">
+                            <option value="instagram">Instagram</option>
+                            <option value="twitter">X/Twitter</option>
+                            <option value="facebook">Facebook</option>
+                            <option value="linkedin">LinkedIn</option>
+                            <option value="tiktok">TikTok</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Additional Context (optional)</label>
+                    <textarea id="aiContext" placeholder="Add any specific details, quotes, or context you want included..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label><input type="checkbox" id="aiHashtags" checked> Include relevant hashtags</label>
+                </div>
+                
+                <button class="generate-ai-btn" onclick="generateAIPost()">
+                    <i class="fas fa-magic"></i> Generate Post
+                </button>
+                
+                <div class="ai-output" id="aiOutput" style="display:none">
+                    <label>Generated Post:</label>
+                    <div class="ai-result" id="aiResult"></div>
+                    <div class="ai-actions">
+                        <button onclick="copyAIPost()"><i class="fas fa-copy"></i> Copy</button>
+                        <button onclick="useAIPost()"><i class="fas fa-check"></i> Use This</button>
+                        <button onclick="regeneratePost()"><i class="fas fa-sync"></i> Regenerate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Media Picker Modal -->
+    <div id="mediaPickerModal" class="modal">
+        <div class="modal-content modal-large">
+            <span class="close-modal" onclick="closeModal('mediaPickerModal')">&times;</span>
+            <h3><i class="fas fa-images"></i> Select Media</h3>
+            <div class="media-picker-grid" id="mediaPickerGrid"></div>
+            <div class="modal-footer">
+                <button class="modal-btn secondary" onclick="closeModal('mediaPickerModal')">Cancel</button>
+                <button class="modal-btn" onclick="confirmMediaSelection()">Add Selected</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Viewer Modal -->
+    <div id="imageViewerModal" class="modal image-viewer-modal">
+        <span class="close-modal" onclick="closeModal('imageViewerModal')">&times;</span>
+        <img id="viewerImage" src="" alt="Preview">
+        <div class="viewer-controls">
+            <button onclick="downloadImage()"><i class="fas fa-download"></i></button>
+            <button onclick="shareImage()"><i class="fas fa-share"></i></button>
+        </div>
+    </div>
+
+    <!-- Other Modals -->
     <div id="postModal" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal('postModal')">&times;</span>
@@ -686,7 +867,19 @@
             <div class="video-templates">
                 <button class="template-btn">Book Trailer</button>
                 <button class="template-btn">Quote Card</button>
-                <button class="template-btn">Behind the Scenes</button>
+                <button class="template-btn">Behind Scenes</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="uploadModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('uploadModal')">&times;</span>
+            <h3><i class="fas fa-cloud-upload-alt"></i> Upload Media</h3>
+            <div class="modal-upload-zone" id="modalDropZone">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Drag & drop files here or click to browse</p>
+                <input type="file" id="modalUploadInput" multiple accept="image/*,video/*">
             </div>
         </div>
     </div>

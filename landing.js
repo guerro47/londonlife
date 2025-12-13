@@ -1,7 +1,46 @@
-// London Life - Customer Landing Page JavaScript
+// Artem Artemenko - Author Landing Page JavaScript
 // Content is managed via CMS in the Author Command Center
 
 const CMS_STORAGE_KEY = 'londonlife_cms';
+
+// ==========================================
+// INTRO SPLASH SCREEN
+// ==========================================
+
+function initIntroSplash() {
+    const splash = document.getElementById('introSplash');
+    if (!splash) return;
+    
+    // Hide splash after animation completes (2.5s loader + 0.5s delay)
+    setTimeout(() => {
+        splash.classList.add('hidden');
+        // Show demo toast after splash fades
+        setTimeout(showDemoToast, 500);
+    }, 3000);
+}
+
+// ==========================================
+// DEMO TOAST POPUP
+// ==========================================
+
+function showDemoToast() {
+    const toast = document.getElementById('demoToast');
+    if (!toast) return;
+    
+    toast.classList.add('show');
+    
+    // Auto-hide after 15 seconds if not manually closed
+    setTimeout(() => {
+        closeDemoToast();
+    }, 15000);
+}
+
+function closeDemoToast() {
+    const toast = document.getElementById('demoToast');
+    if (toast) {
+        toast.classList.remove('show');
+    }
+}
 
 // Default content (fallback if CMS not configured)
 const defaultContent = {
@@ -281,6 +320,9 @@ function initSmoothScroll() {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', function() {
+    // Start intro splash sequence
+    initIntroSplash();
+    
     applyContent();
     setCurrentYear();
     initSmoothScroll();
@@ -296,4 +338,4 @@ window.addEventListener('storage', function(e) {
     }
 });
 
-console.log('London Life Landing Page Loaded');
+console.log('Artem Artemenko - Author Page Loaded');

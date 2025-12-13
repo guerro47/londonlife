@@ -1,6 +1,8 @@
-/* London Life - Customer Landing Page Styles */
+/* Artem Artemenko - Author Landing Page Styles */
 
 :root {
+    --primary-green: #2e8b57;
+    --primary-green-dark: #228b22;
     --primary-orange: #ff6b35;
     --primary-orange-dark: #ee5a24;
     --primary-dark: #0a0a0a;
@@ -11,9 +13,187 @@
     --text-muted: #a0a0a0;
     --text-dim: #666666;
     --gradient-orange: linear-gradient(135deg, #ff6b35, #ee5a24);
+    --gradient-green: linear-gradient(135deg, #2e8b57, #228b22);
     --gradient-gold: linear-gradient(135deg, #d4a574, #b8956a);
     --shadow-glow: 0 0 60px rgba(255, 107, 53, 0.4);
+    --shadow-green-glow: 0 0 60px rgba(46, 139, 87, 0.4);
     --shadow-soft: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+/* ==========================================
+   INTRO SPLASH SCREEN
+   ========================================== */
+
+.intro-splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.intro-splash.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.intro-splash .splash-content {
+    text-align: center;
+    animation: fadeInUp 1s ease;
+}
+
+.logo-container {
+    margin-bottom: 2rem;
+}
+
+.splash-logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    animation: logoPulse 2s ease-in-out infinite;
+    box-shadow: var(--shadow-green-glow);
+}
+
+@keyframes logoPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(46, 139, 87, 0.4); }
+    50% { transform: scale(1.05); box-shadow: 0 0 80px rgba(46, 139, 87, 0.6); }
+}
+
+.splash-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.splash-tagline {
+    font-size: 1rem;
+    color: var(--primary-green);
+    letter-spacing: 0.2em;
+    margin-bottom: 2rem;
+}
+
+.splash-loader {
+    width: 200px;
+    height: 3px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.loader-bar {
+    width: 0;
+    height: 100%;
+    background: var(--gradient-green);
+    border-radius: 3px;
+    animation: loadBar 2.5s ease forwards;
+}
+
+@keyframes loadBar {
+    0% { width: 0; }
+    100% { width: 100%; }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================
+   DEMO TOAST POPUP
+   ========================================== */
+
+.demo-toast {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 10000;
+    max-width: 420px;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.demo-toast.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast-content {
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+    border: 2px solid var(--primary-green);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(46, 139, 87, 0.3);
+    position: relative;
+}
+
+.toast-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.toast-close:hover {
+    color: var(--primary-green);
+}
+
+.toast-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--gradient-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.toast-message h4 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-green);
+}
+
+.toast-message p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin-bottom: 0.75rem;
+}
+
+.toast-message strong {
+    color: var(--text-light);
+}
+
+.toast-signature {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    font-style: italic;
 }
 
 * {
@@ -69,17 +249,63 @@ body {
 
 .nav-logo {
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-logo-img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
 }
 
 .logo-text {
     font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--text-light);
+}
+
+.hero-logo-badge {
+    margin-bottom: 1.5rem;
+}
+
+.hero-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: var(--shadow-green-glow);
+}
+
+.coming-soon-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0.75rem 1.5rem;
+    background: rgba(46, 139, 87, 0.15);
+    border: 1px solid var(--primary-green);
+    border-radius: 50px;
+    margin-top: 2rem;
+    color: var(--primary-green);
+    font-size: 0.85rem;
+    font-weight: 500;
+    animation: pulseGreen 2s ease-in-out infinite;
+}
+
+@keyframes pulseGreen {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(46, 139, 87, 0.4); }
+    50% { box-shadow: 0 0 0 10px rgba(46, 139, 87, 0); }
+}
+
+.featured-book-label {
+    text-align: center;
+    margin-top: 1rem;
+    color: var(--primary-green);
+    font-size: 0.8rem;
     letter-spacing: 0.2em;
-    background: var(--gradient-orange);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    text-transform: uppercase;
 }
 
 .nav-menu {
@@ -1051,5 +1277,233 @@ body {
     
     .newsletter-form input {
         width: 100%;
+    }
+    
+    .splash-name {
+        font-size: 1.5rem;
+        letter-spacing: 0.2em;
+    }
+    
+    .demo-toast {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+    
+    .featured-book-card {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================
+   BOOKS SECTION
+   ========================================== */
+
+.books-section {
+    padding: 8rem 0;
+    background: var(--primary-dark);
+}
+
+.featured-book-card {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 4rem;
+    background: var(--secondary-dark);
+    border-radius: 24px;
+    padding: 2rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    margin-bottom: 3rem;
+}
+
+.featured-book-image {
+    position: relative;
+}
+
+.featured-book-image img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.book-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--gradient-green);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+}
+
+.featured-book-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.book-category {
+    color: var(--primary-green);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.featured-book-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.book-synopsis {
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.book-meta {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.meta-item {
+    text-align: center;
+}
+
+.meta-label {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.25rem;
+}
+
+.meta-value {
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+.book-rating {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.book-rating .stars {
+    color: #fbbf24;
+}
+
+.book-rating span {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.coming-soon-section {
+    text-align: center;
+}
+
+.coming-soon-card {
+    display: inline-block;
+    background: rgba(46, 139, 87, 0.1);
+    border: 2px dashed var(--primary-green);
+    border-radius: 20px;
+    padding: 3rem 4rem;
+    text-align: center;
+}
+
+.coming-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--gradient-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.8rem;
+}
+
+.coming-soon-card h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-green);
+}
+
+.coming-soon-card p {
+    color: var(--text-muted);
+    max-width: 300px;
+}
+
+/* About Intro */
+.about-intro {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 4rem;
+    align-items: center;
+}
+
+.about-intro-content .about-lead {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.about-intro-content .about-text {
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.about-logo {
+    width: 100%;
+    max-width: 250px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-green-glow);
+}
+
+.footer-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .featured-book-card {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .featured-book-image {
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .book-meta {
+        justify-content: center;
+    }
+    
+    .book-rating {
+        justify-content: center;
+    }
+    
+    .about-intro {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .about-intro-image {
+        order: -1;
+    }
+    
+    .about-logo {
+        margin: 0 auto;
     }
 }

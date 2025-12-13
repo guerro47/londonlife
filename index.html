@@ -3,29 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>London Life - Be Good To People | Artem Artemenko</title>
-    <meta name="description" content="London Life: Be Good To People - A compelling memoir by Artem Artemenko about resilience, forgiveness, and the human spirit in the streets of London.">
-    <meta name="keywords" content="London Life, Artem Artemenko, memoir, book, resilience, London, forgiveness">
-    <meta property="og:title" content="London Life - Be Good To People">
-    <meta property="og:description" content="A compelling memoir about resilience and the transformative power of forgiveness.">
-    <meta property="og:image" content="IMG_1218.jpeg">
-    <meta property="og:type" content="book">
+    <title>Artem Artemenko | Author & Storyteller</title>
+    <meta name="description" content="Artem Artemenko - Author of London Life: Be Good To People. A compelling memoir about resilience, forgiveness, and the human spirit.">
+    <meta name="keywords" content="Artem Artemenko, Author, London Life, memoir, book, resilience, London, forgiveness">
+    <meta property="og:title" content="Artem Artemenko | Author & Storyteller">
+    <meta property="og:description" content="Author of London Life: Be Good To People - A compelling memoir about resilience and forgiveness.">
+    <meta property="og:image" content="logo1.JPG">
+    <meta property="og:type" content="website">
     <link rel="stylesheet" href="landing.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Intro Splash Screen -->
+    <div id="introSplash" class="intro-splash">
+        <div class="splash-content">
+            <div class="logo-container">
+                <img src="logo1.JPG" alt="Artem Artemenko" class="splash-logo">
+            </div>
+            <h1 class="splash-name">ARTEM ARTEMENKO</h1>
+            <p class="splash-tagline">Author & Storyteller</p>
+            <div class="splash-loader">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Toast Popup -->
+    <div id="demoToast" class="demo-toast">
+        <div class="toast-content">
+            <button class="toast-close" onclick="closeDemoToast()">&times;</button>
+            <div class="toast-icon">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <div class="toast-message">
+                <h4>Welcome to the Demo!</h4>
+                <p>This is a <strong>Demo</strong> for Artem. We'll finalise all the details as per Phase 2. Just look at what you like and note it in an email - all changes will be made!</p>
+                <span class="toast-signature">- Development Team</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav class="landing-nav" id="landingNav">
         <div class="nav-container">
             <a href="#" class="nav-logo">
-                <span class="logo-text">LONDON LIFE</span>
+                <img src="logo1.JPG" alt="AA" class="nav-logo-img">
+                <span class="logo-text">ARTEM ARTEMENKO</span>
             </a>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#author">Author</a></li>
-                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#books">Books</a></li>
+                <li><a href="#author">The Author</a></li>
+                <li><a href="#contact">Contact</a></li>
                 <li><a href="#buy" class="nav-cta">Get the Book</a></li>
             </ul>
             <button class="nav-toggle" onclick="toggleNav()">
@@ -44,37 +75,28 @@
         <div class="hero-content">
             <div class="hero-grid">
                 <div class="hero-text">
-                    <span class="hero-badge" id="heroBadge">NEW RELEASE</span>
+                    <div class="hero-logo-badge">
+                        <img src="logo1.JPG" alt="AA" class="hero-logo">
+                    </div>
                     <h1 class="hero-title">
-                        <span id="heroTitleLine1">LONDON</span>
-                        <span id="heroTitleLine2">LIFE</span>
+                        <span id="heroTitleLine1">ARTEM</span>
+                        <span id="heroTitleLine2">ARTEMENKO</span>
                     </h1>
-                    <p class="hero-subtitle" id="heroSubtitle">Be Good To People</p>
-                    <p class="hero-author">by <strong id="heroAuthor">Artem Artemenko</strong></p>
+                    <p class="hero-subtitle" id="heroSubtitle">Author & Storyteller</p>
                     <p class="hero-description" id="heroDescription">
-                        A compelling memoir about resilience, forgiveness, and the unwavering strength of the human spirit in the bustling streets of London.
+                        Sharing powerful stories of resilience, forgiveness, and the human spirit. Welcome to my world of words and wisdom.
                     </p>
                     <div class="hero-buttons">
-                        <a href="#buy" class="btn btn-primary" id="heroCTA">
-                            <i class="fas fa-shopping-cart"></i> <span id="heroCTAText">Order Now</span>
+                        <a href="#books" class="btn btn-primary">
+                            <i class="fas fa-book"></i> Explore My Work
                         </a>
                         <a href="#about" class="btn btn-secondary">
-                            <i class="fas fa-book-open"></i> Learn More
+                            <i class="fas fa-user"></i> About Me
                         </a>
                     </div>
-                    <div class="hero-stats">
-                        <div class="hero-stat">
-                            <span class="stat-number" id="statSales">1,200+</span>
-                            <span class="stat-label">Copies Sold</span>
-                        </div>
-                        <div class="hero-stat">
-                            <span class="stat-number" id="statRating">4.8</span>
-                            <span class="stat-label">Average Rating</span>
-                        </div>
-                        <div class="hero-stat">
-                            <span class="stat-number" id="statReviews">150+</span>
-                            <span class="stat-label">Reviews</span>
-                        </div>
+                    <div class="coming-soon-badge">
+                        <i class="fas fa-rocket"></i>
+                        <span>Much More Coming Soon</span>
                     </div>
                 </div>
                 <div class="hero-book">
@@ -83,6 +105,7 @@
                         <img src="IMG_1218.jpeg" alt="London Life Book Cover" class="book-cover" id="heroBookCover">
                         <div class="book-shadow"></div>
                     </div>
+                    <p class="featured-book-label">Featured Book</p>
                 </div>
             </div>
         </div>
@@ -92,56 +115,101 @@
         </div>
     </section>
 
-    <!-- About the Book Section -->
+    <!-- About Section (Brief) -->
     <section id="about" class="about-section">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">ABOUT THE BOOK</span>
-                <h2 class="section-title" id="aboutTitle">A Journey Through Adversity</h2>
+                <span class="section-tag">WELCOME</span>
+                <h2 class="section-title">The Journey Begins</h2>
             </div>
-            <div class="about-grid">
-                <div class="about-image">
-                    <img src="IMG_5692.jpeg" alt="London Life Back Cover" id="aboutImage">
-                </div>
-                <div class="about-content">
-                    <p class="about-lead" id="aboutLead">
-                        Within the pages of this compelling memoir, Artem recounts a journey through betrayal and injustice in the bustling streets of London.
+            <div class="about-intro">
+                <div class="about-intro-content">
+                    <p class="about-lead">
+                        I'm Artem Artemenko, a London-based author dedicated to sharing stories that inspire, heal, and transform.
                     </p>
-                    <p class="about-text" id="aboutText">
-                        Through personal trials & triumphs, Artem discovers the unwavering strength of resilience & the transformative power of forgiveness. His story is a poignant reminder that even in the face of adversity, the human spirit has the capacity to overcome and thrive.
+                    <p class="about-text">
+                        Through my writing, I explore the depths of human experience - the triumphs, the struggles, and everything in between. My debut memoir "London Life: Be Good To People" is just the beginning of this journey.
                     </p>
                     <div class="about-features">
                         <div class="feature">
+                            <i class="fas fa-pen-fancy"></i>
+                            <span>Authentic Storytelling</span>
+                        </div>
+                        <div class="feature">
                             <i class="fas fa-heart"></i>
-                            <span id="feature1">A story of resilience</span>
+                            <span>Inspiring Messages</span>
                         </div>
                         <div class="feature">
-                            <i class="fas fa-city"></i>
-                            <span id="feature2">Set in London</span>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-book"></i>
-                            <span id="feature3">Memoir & Life Lessons</span>
+                            <i class="fas fa-globe"></i>
+                            <span>Global Perspective</span>
                         </div>
                     </div>
-                    <div class="book-details">
-                        <div class="detail">
-                            <span class="detail-label">Format</span>
-                            <span class="detail-value" id="bookFormat">Paperback</span>
+                </div>
+                <div class="about-intro-image">
+                    <img src="logo1.JPG" alt="Artem Artemenko Logo" class="about-logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Books Section -->
+    <section id="books" class="books-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">MY WORK</span>
+                <h2 class="section-title">Published Works</h2>
+            </div>
+            
+            <!-- Featured Book -->
+            <div class="featured-book-card">
+                <div class="featured-book-image">
+                    <img src="IMG_1218.jpeg" alt="London Life Book Cover">
+                    <div class="book-badge">DEBUT MEMOIR</div>
+                </div>
+                <div class="featured-book-info">
+                    <span class="book-category">Memoir</span>
+                    <h3>London Life: Be Good To People</h3>
+                    <p class="book-synopsis">
+                        Within the pages of this compelling memoir, I recount a journey through betrayal and injustice in the bustling streets of London. Through personal trials & triumphs, I discovered the unwavering strength of resilience & the transformative power of forgiveness.
+                    </p>
+                    <div class="book-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Format</span>
+                            <span class="meta-value">Paperback</span>
                         </div>
-                        <div class="detail">
-                            <span class="detail-label">Pages</span>
-                            <span class="detail-value" id="bookPages">256</span>
+                        <div class="meta-item">
+                            <span class="meta-label">Pages</span>
+                            <span class="meta-value">256</span>
                         </div>
-                        <div class="detail">
-                            <span class="detail-label">ISBN</span>
-                            <span class="detail-value" id="bookISBN">9798893970265</span>
-                        </div>
-                        <div class="detail">
-                            <span class="detail-label">Price</span>
-                            <span class="detail-value" id="bookPrice">$19.99</span>
+                        <div class="meta-item">
+                            <span class="meta-label">Price</span>
+                            <span class="meta-value">£15.99</span>
                         </div>
                     </div>
+                    <div class="book-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span>4.8 out of 5 (156 reviews)</span>
+                    </div>
+                    <a href="#buy" class="btn btn-primary">
+                        <i class="fas fa-shopping-cart"></i> Order Now - £15.99
+                    </a>
+                </div>
+            </div>
+
+            <!-- Coming Soon -->
+            <div class="coming-soon-section">
+                <div class="coming-soon-card">
+                    <div class="coming-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h4>More Books Coming Soon</h4>
+                    <p>New stories are in the works. Subscribe to be the first to know about upcoming releases.</p>
                 </div>
             </div>
         </div>
@@ -157,7 +225,7 @@
                 <blockquote id="featuredExcerpt">
                     "The streets of London taught me more about life than any classroom ever could. In the chaos of the city, I found my purpose. In the betrayal of those I trusted, I discovered my strength."
                 </blockquote>
-                <cite>— From Chapter 1, <span id="excerptChapter">"New Beginnings"</span></cite>
+                <cite>— From Chapter 1, "New Beginnings"</cite>
             </div>
         </div>
     </section>
@@ -166,28 +234,28 @@
     <section id="author" class="author-section">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">MEET THE AUTHOR</span>
-                <h2 class="section-title" id="authorSectionTitle">Artem Artemenko</h2>
+                <span class="section-tag">THE AUTHOR</span>
+                <h2 class="section-title">Meet Artem</h2>
             </div>
             <div class="author-grid">
                 <div class="author-image">
                     <img src="IMG_5254.jpeg" alt="Artem Artemenko" id="authorPhoto">
                 </div>
                 <div class="author-content">
-                    <p class="author-bio" id="authorBio">
-                        Artem Artemenko is a London-based author whose debut memoir "London Life: Be Good To People" captures the essence of resilience and human spirit. Through his writing, he shares powerful stories of overcoming adversity and finding strength in the most challenging circumstances.
+                    <p class="author-bio">
+                        I'm a London-based author with a passion for authentic storytelling. My debut memoir "London Life: Be Good To People" captures the essence of resilience and the human spirit.
                     </p>
-                    <p class="author-bio-extended" id="authorBioExtended">
-                        Born with a passion for storytelling, Artem uses his experiences to inspire others to embrace life's challenges and transform them into opportunities for growth.
+                    <p class="author-bio-extended">
+                        Through my writing, I share powerful stories of overcoming adversity and finding strength in the most challenging circumstances. I believe that every story has the power to inspire and transform lives.
                     </p>
                     <div class="author-social">
-                        <a href="#" class="social-btn" id="authorInstagram" data-platform="instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-btn" id="authorTiktok" data-platform="tiktok"><i class="fab fa-tiktok"></i></a>
-                        <a href="#" class="social-btn" id="authorTwitter" data-platform="twitter"><i class="fab fa-x-twitter"></i></a>
-                        <a href="#" class="social-btn" id="authorAmazon" data-platform="amazon"><i class="fab fa-amazon"></i></a>
+                        <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-btn"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" class="social-btn"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" class="social-btn"><i class="fab fa-amazon"></i></a>
                     </div>
-                    <a href="#buy" class="btn btn-primary">
-                        <i class="fas fa-book"></i> Read My Story
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fas fa-envelope"></i> Get In Touch
                     </a>
                 </div>
             </div>
@@ -245,20 +313,6 @@
                     </div>
                 </div>
             </div>
-            <div class="reviews-cta">
-                <p>Join thousands of readers who have been inspired by this story</p>
-                <div class="rating-summary">
-                    <div class="rating-stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <span id="overallRating">4.8 out of 5</span>
-                    <span class="rating-count">(<span id="reviewCount">156</span> reviews)</span>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -276,7 +330,7 @@
                 <div class="buy-options">
                     <div class="price-tag">
                         <span class="price-label">Starting at</span>
-                        <span class="price-value" id="buyPrice">$19.99</span>
+                        <span class="price-value" id="buyPrice">£15.99</span>
                     </div>
                     <div class="buy-buttons" id="buyButtons">
                         <a href="#" class="buy-btn amazon" id="buyAmazon">
@@ -285,7 +339,7 @@
                         </a>
                         <a href="#" class="buy-btn barnes" id="buyBarnes">
                             <i class="fas fa-book"></i>
-                            <span>Barnes & Noble</span>
+                            <span>Waterstones</span>
                         </a>
                         <a href="#" class="buy-btn direct" id="buyDirect">
                             <i class="fas fa-store"></i>
@@ -299,7 +353,7 @@
                     <div class="buy-features">
                         <div class="buy-feature">
                             <i class="fas fa-truck"></i>
-                            <span>Free Shipping on orders over $30</span>
+                            <span>Free UK Shipping on orders over £25</span>
                         </div>
                         <div class="buy-feature">
                             <i class="fas fa-undo"></i>
@@ -315,8 +369,8 @@
         </div>
     </section>
 
-    <!-- Newsletter Section -->
-    <section class="newsletter-section">
+    <!-- Contact / Newsletter Section -->
+    <section id="contact" class="newsletter-section">
         <div class="container">
             <div class="newsletter-card">
                 <div class="newsletter-content">
@@ -338,34 +392,35 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <h3>LONDON LIFE</h3>
-                    <p>Be Good To People</p>
+                    <img src="logo1.JPG" alt="Artem Artemenko" class="footer-logo">
+                    <h3>ARTEM ARTEMENKO</h3>
+                    <p>Author & Storyteller</p>
                     <div class="footer-social">
-                        <a href="#" id="footerInstagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" id="footerTiktok"><i class="fab fa-tiktok"></i></a>
-                        <a href="#" id="footerTwitter"><i class="fab fa-x-twitter"></i></a>
-                        <a href="#" id="footerAmazon"><i class="fab fa-amazon"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#"><i class="fab fa-amazon"></i></a>
                     </div>
                 </div>
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About the Book</a></li>
-                        <li><a href="#author">About the Author</a></li>
-                        <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#books">Books</a></li>
+                        <li><a href="#author">The Author</a></li>
                         <li><a href="#buy">Buy Now</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">
                     <h4>Contact</h4>
-                    <p id="contactEmail"><i class="fas fa-envelope"></i> contact@londonlife-book.com</p>
-                    <p id="contactLocation"><i class="fas fa-map-marker-alt"></i> London, United Kingdom</p>
+                    <p><i class="fas fa-envelope"></i> contact@artemartemenko.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> London, United Kingdom</p>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>&copy; <span id="currentYear">2025</span> Artem Artemenko. All rights reserved.</p>
-                <p class="footer-credit">London Life - Be Good To People</p>
+                <p class="footer-credit">Author & Storyteller</p>
             </div>
         </div>
     </footer>

@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>London Life - Author Command Center | Artem Artemenko</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <section id="loginScreen" class="login-screen">
+        <div class="login-background">
+            <img src="IMG_1218.jpeg" alt="Background" class="login-bg-image">
+            <div class="login-overlay"></div>
+        </div>
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <img src="unnamed.jpg" alt="London Life" class="login-logo">
+                    <h1>LONDON LIFE</h1>
+                    <p>Author Command Center</p>
+                </div>
+                <form id="loginForm" class="login-form" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="loginEmail"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="loginEmail" required placeholder="Enter your email" autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword"><i class="fas fa-lock"></i> Password</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="loginPassword" required placeholder="Enter your password" autocomplete="current-password">
+                            <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">
+                                <i class="fas fa-eye" id="passwordToggleIcon"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-password" onclick="showForgotPassword(event)">Forgot password?</a>
+                    </div>
+                    <div id="loginError" class="login-error"></div>
+                    <button type="submit" class="login-btn" id="loginBtn">
+                        <span>Sign In</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+                <div class="login-footer">
+                    <p>Secure access for authorized users only</p>
+                    <div class="security-badges">
+                        <span><i class="fas fa-shield-alt"></i> 256-bit SSL</span>
+                        <span><i class="fas fa-lock"></i> Encrypted</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Splash Screen -->
+    <section id="splash" class="splash-screen">
+        <div class="video-background">
+            <div class="video-placeholder" id="bgVideo">
+                <div class="video-overlay"></div>
+                <img src="IMG_1218.jpeg" alt="London Life Cover" class="cover-bg">
+            </div>
+        </div>
+        <div class="splash-content">
+            <div class="book-cover-container">
+                <img src="IMG_1218.jpeg" alt="London Life - Be Good To People" class="book-cover-main">
+                <div class="book-glow"></div>
+            </div>
+            <h1 class="title-main">LONDON LIFE</h1>
+            <p class="tagline">Be Good To People</p>
+            <p class="author-name">Artem Artemenko</p>
+            <button class="enter-btn" onclick="enterCommandCenter()">
+                <span>Enter Command Center</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Main Command Center -->
+    <main id="commandCenter" class="command-center">
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <div class="nav-brand">
+                <img src="unnamed.jpg" alt="London Life" class="nav-logo">
+                <span>LONDON LIFE</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#dashboard" class="active">Dashboard</a></li>
+                <li><a href="#content">Content</a></li>
+                <li><a href="#social">Social</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#analytics">Analytics</a></li>
+                <li><a href="#orders">Orders</a></li>
+            </ul>
+            <div class="nav-profile">
+                <span>Artem Artemenko</span>
+                <div class="profile-avatar">AA</div>
+                <button class="logout-btn" onclick="handleLogout()" title="Sign Out">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section dashboard-section">
+            <div class="section-header">
+                <h2><i class="fas fa-th-large"></i> Author Dashboard</h2>
+                <p>Welcome back, Artem. Here's your command center overview.</p>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-book"></i></div>
+                    <div class="stat-info">
+                        <h3>Book Sales</h3>
+                        <p class="stat-number">1,247</p>
+                        <span class="stat-change positive">+12% this month</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <div class="stat-info">
+                        <h3>Followers</h3>
+                        <p class="stat-number">15.2K</p>
+                        <span class="stat-change positive">+340 new</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-eye"></i></div>
+                    <div class="stat-info">
+                        <h3>Views</h3>
+                        <p class="stat-number">89.4K</p>
+                        <span class="stat-change positive">+28% this week</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-star"></i></div>
+                    <div class="stat-info">
+                        <h3>Reviews</h3>
+                        <p class="stat-number">4.8</p>
+                        <span class="stat-change">156 reviews</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="openModal('postModal')">
+                        <i class="fas fa-plus"></i> New Post
+                    </button>
+                    <button class="action-btn" onclick="openModal('videoModal')">
+                        <i class="fas fa-video"></i> Create Video
+                    </button>
+                    <button class="action-btn" onclick="openModal('emailModal')">
+                        <i class="fas fa-envelope"></i> Send Newsletter
+                    </button>
+                    <button class="action-btn" onclick="openModal('eventModal')">
+                        <i class="fas fa-calendar"></i> Schedule Event
+                    </button>
+                </div>
+            </div>
+
+            <!-- Image Gallery Placeholders -->
+            <div class="gallery-section">
+                <h3>Media Gallery</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item featured">
+                        <img src="IMG_1218.jpeg" alt="London Life Cover">
+                        <div class="gallery-overlay">
+                            <span>Book Cover - Front</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="IMG_5254.jpeg" alt="London Life Held">
+                        <div class="gallery-overlay">
+                            <span>Promotional Shot</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="IMG_5255.jpeg" alt="London Life">
+                        <div class="gallery-overlay">
+                            <span>Cover Variant 1</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="IMG_5692.jpeg" alt="London Life Back Cover">
+                        <div class="gallery-overlay">
+                            <span>Back Cover</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="unnamed.jpg" alt="Full Book Display">
+                        <div class="gallery-overlay">
+                            <span>Full Display</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Management Section -->
+        <section id="content" class="section content-section">
+            <div class="section-header">
+                <h2><i class="fas fa-edit"></i> Content Management</h2>
+                <p>Manage your book content, excerpts, and promotional materials.</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="content-card">
+                    <h4>Book Synopsis</h4>
+                    <textarea id="synopsis" placeholder="Enter book synopsis...">Within the pages of this compelling memoir, Artem recounts a journey through betrayal and injustice in the bustling streets of London. Through personal trials & triumphs, Artem discovers the unwavering strength of resilience & the transformative power of forgiveness. His story is a poignant reminder that even in the face of adversity, the human spirit has the capacity to overcome and thrive.</textarea>
+                    <button class="save-btn" onclick="saveContent('synopsis')">Save Synopsis</button>
+                </div>
+
+                <div class="content-card">
+                    <h4>Author Bio</h4>
+                    <textarea id="authorBio" placeholder="Enter author bio...">Artem Artemenko is a London-based author whose debut memoir "London Life: Be Good To People" captures the essence of resilience and human spirit. Through his writing, he shares powerful stories of overcoming adversity.</textarea>
+                    <button class="save-btn" onclick="saveContent('authorBio')">Save Bio</button>
+                </div>
+
+                <div class="content-card">
+                    <h4>Featured Excerpt</h4>
+                    <textarea id="excerpt" placeholder="Enter featured excerpt...">Add your most powerful excerpt here to feature on promotional materials...</textarea>
+                    <button class="save-btn" onclick="saveContent('excerpt')">Save Excerpt</button>
+                </div>
+
+                <div class="content-card">
+                    <h4>Press Kit</h4>
+                    <div class="file-upload">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag & drop files or click to upload</p>
+                        <input type="file" id="pressKit" multiple>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Media Section -->
+        <section id="social" class="section social-section">
+            <div class="section-header">
+                <h2><i class="fas fa-share-alt"></i> Social Media Command</h2>
+                <p>Post to all platforms from one place.</p>
+            </div>
+
+            <div class="social-composer">
+                <div class="composer-header">
+                    <h4>Create New Post</h4>
+                    <div class="platform-toggles">
+                        <label class="platform-toggle active" data-platform="instagram">
+                            <i class="fab fa-instagram"></i>
+                            <input type="checkbox" checked>
+                        </label>
+                        <label class="platform-toggle active" data-platform="tiktok">
+                            <i class="fab fa-tiktok"></i>
+                            <input type="checkbox" checked>
+                        </label>
+                        <label class="platform-toggle active" data-platform="twitter">
+                            <i class="fab fa-x-twitter"></i>
+                            <input type="checkbox" checked>
+                        </label>
+                        <label class="platform-toggle active" data-platform="facebook">
+                            <i class="fab fa-facebook"></i>
+                            <input type="checkbox" checked>
+                        </label>
+                        <label class="platform-toggle" data-platform="linkedin">
+                            <i class="fab fa-linkedin"></i>
+                            <input type="checkbox">
+                        </label>
+                        <label class="platform-toggle" data-platform="youtube">
+                            <i class="fab fa-youtube"></i>
+                            <input type="checkbox">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="composer-body">
+                    <textarea id="postContent" placeholder="What's on your mind? Share your London Life story..."></textarea>
+                    <div class="media-attach">
+                        <button class="attach-btn"><i class="fas fa-image"></i> Add Image</button>
+                        <button class="attach-btn"><i class="fas fa-video"></i> Add Video</button>
+                        <button class="attach-btn"><i class="fas fa-link"></i> Add Link</button>
+                    </div>
+                </div>
+
+                <div class="composer-footer">
+                    <div class="schedule-options">
+                        <label>
+                            <input type="radio" name="postTime" value="now" checked> Post Now
+                        </label>
+                        <label>
+                            <input type="radio" name="postTime" value="schedule"> Schedule
+                        </label>
+                        <input type="datetime-local" id="scheduleTime" class="hidden">
+                    </div>
+                    <button class="post-btn" onclick="publishPost()">
+                        <i class="fas fa-paper-plane"></i> Publish
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scheduled Posts -->
+            <div class="scheduled-posts">
+                <h4>Scheduled Posts</h4>
+                <div class="post-queue">
+                    <div class="queued-post">
+                        <div class="post-preview">
+                            <img src="IMG_5254.jpeg" alt="Post preview">
+                        </div>
+                        <div class="post-details">
+                            <p>"The streets of London taught me more about life than any classroom ever could..."</p>
+                            <span class="post-time"><i class="fas fa-clock"></i> Dec 15, 2025 - 10:00 AM</span>
+                            <div class="post-platforms">
+                                <i class="fab fa-instagram"></i>
+                                <i class="fab fa-tiktok"></i>
+                                <i class="fab fa-x-twitter"></i>
+                            </div>
+                        </div>
+                        <div class="post-actions">
+                            <button class="edit-post"><i class="fas fa-edit"></i></button>
+                            <button class="delete-post"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Videos & Reels Section -->
+        <section id="videos" class="section videos-section">
+            <div class="section-header">
+                <h2><i class="fas fa-film"></i> Video & Reels Studio</h2>
+                <p>Create AI-generated videos and reels with Grok, Runway, and Pika.</p>
+            </div>
+
+            <!-- AI Video Generation -->
+            <div class="ai-video-generator">
+                <h3>AI Video Generation</h3>
+                <div class="generator-tabs">
+                    <button class="gen-tab active" data-gen="grok">Grok AI</button>
+                    <button class="gen-tab" data-gen="runway">Runway ML</button>
+                    <button class="gen-tab" data-gen="pika">Pika Labs</button>
+                    <button class="gen-tab" data-gen="sora">OpenAI Sora</button>
+                </div>
+
+                <div class="generator-content">
+                    <div class="prompt-section">
+                        <h4>Video Prompt</h4>
+                        <textarea id="videoPrompt" placeholder="Describe your video vision...">Cinematic London cityscape at dusk, rain-slicked streets reflecting neon lights, a solitary figure walking with purpose, camera slowly panning to reveal the iconic London skyline, moody atmospheric lighting, film grain, 4K quality</textarea>
+                        
+                        <div class="prompt-presets">
+                            <h5>Quick Prompts for London Life:</h5>
+                            <button class="preset-btn" onclick="setPrompt('london-rain')">London Rain Scene</button>
+                            <button class="preset-btn" onclick="setPrompt('book-reveal')">Book Reveal</button>
+                            <button class="preset-btn" onclick="setPrompt('author-intro')">Author Introduction</button>
+                            <button class="preset-btn" onclick="setPrompt('testimonial')">Testimonial Background</button>
+                            <button class="preset-btn" onclick="setPrompt('quote-card')">Animated Quote</button>
+                        </div>
+                    </div>
+
+                    <div class="video-settings">
+                        <div class="setting-group">
+                            <label>Duration</label>
+                            <select id="videoDuration">
+                                <option value="5">5 seconds</option>
+                                <option value="10" selected>10 seconds</option>
+                                <option value="15">15 seconds</option>
+                                <option value="30">30 seconds</option>
+                                <option value="60">60 seconds (Reel)</option>
+                            </select>
+                        </div>
+                        <div class="setting-group">
+                            <label>Aspect Ratio</label>
+                            <select id="aspectRatio">
+                                <option value="9:16">9:16 (Reels/TikTok)</option>
+                                <option value="16:9">16:9 (YouTube)</option>
+                                <option value="1:1">1:1 (Square)</option>
+                                <option value="4:5">4:5 (Instagram)</option>
+                            </select>
+                        </div>
+                        <div class="setting-group">
+                            <label>Style</label>
+                            <select id="videoStyle">
+                                <option value="cinematic">Cinematic</option>
+                                <option value="documentary">Documentary</option>
+                                <option value="artistic">Artistic</option>
+                                <option value="minimal">Minimal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button class="generate-btn" onclick="generateVideo()">
+                        <i class="fas fa-magic"></i> Generate Video
+                    </button>
+                </div>
+            </div>
+
+            <!-- Video Placeholders Grid -->
+            <div class="video-grid">
+                <h3>Generated Videos</h3>
+                <div class="videos-container">
+                    <div class="video-card placeholder">
+                        <div class="video-thumbnail">
+                            <img src="IMG_1218.jpeg" alt="Video 1">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <span class="duration">0:15</span>
+                        </div>
+                        <div class="video-info">
+                            <h5>London Nights - Background Loop</h5>
+                            <p>Grok AI | Cinematic</p>
+                            <div class="video-actions">
+                                <button><i class="fas fa-download"></i></button>
+                                <button><i class="fas fa-share"></i></button>
+                                <button><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-card placeholder">
+                        <div class="video-thumbnail">
+                            <img src="IMG_5692.jpeg" alt="Video 2">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <span class="duration">0:30</span>
+                        </div>
+                        <div class="video-info">
+                            <h5>Book Reveal Animation</h5>
+                            <p>Runway ML | Dramatic</p>
+                            <div class="video-actions">
+                                <button><i class="fas fa-download"></i></button>
+                                <button><i class="fas fa-share"></i></button>
+                                <button><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-card placeholder">
+                        <div class="video-thumbnail">
+                            <img src="IMG_5254.jpeg" alt="Video 3">
+                            <div class="play-overlay">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <span class="duration">1:00</span>
+                        </div>
+                        <div class="video-info">
+                            <h5>Author Story Reel</h5>
+                            <p>Pika Labs | Documentary</p>
+                            <div class="video-actions">
+                                <button><i class="fas fa-download"></i></button>
+                                <button><i class="fas fa-share"></i></button>
+                                <button><i class="fas fa-edit"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-card add-new">
+                        <div class="add-video-placeholder">
+                            <i class="fas fa-plus"></i>
+                            <p>Generate New Video</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Background Video Variants -->
+            <div class="background-variants">
+                <h3>Background Video Variants</h3>
+                <p class="variant-desc">Pre-configured prompts for website and social media backgrounds</p>
+                <div class="variant-grid">
+                    <div class="variant-card" onclick="selectVariant('rain')">
+                        <div class="variant-preview" style="background: linear-gradient(135deg, #1a1a2e, #16213e);">
+                            <i class="fas fa-cloud-rain"></i>
+                        </div>
+                        <h5>London Rain</h5>
+                        <p>Moody rain on windows</p>
+                    </div>
+                    <div class="variant-card" onclick="selectVariant('skyline')">
+                        <div class="variant-preview" style="background: linear-gradient(135deg, #ff6b35, #1a1a2e);">
+                            <i class="fas fa-city"></i>
+                        </div>
+                        <h5>City Skyline</h5>
+                        <p>London at sunset</p>
+                    </div>
+                    <div class="variant-card" onclick="selectVariant('pages')">
+                        <div class="variant-preview" style="background: linear-gradient(135deg, #2d2d2d, #1a1a1a);">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h5>Turning Pages</h5>
+                        <p>Book pages flipping</p>
+                    </div>
+                    <div class="variant-card" onclick="selectVariant('lights')">
+                        <div class="variant-preview" style="background: linear-gradient(135deg, #ff9f43, #ee5a24);">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h5>Street Lights</h5>
+                        <p>Bokeh light effects</p>
+                    </div>
+                    <div class="variant-card" onclick="selectVariant('fog')">
+                        <div class="variant-preview" style="background: linear-gradient(135deg, #636e72, #2d3436);">
+                            <i class="fas fa-smog"></i>
+                        </div>
+                        <h5>London Fog</h5>
+                        <p>Mysterious atmosphere</p>
+                    </div>
+                    <div class="variant-card" onclick="selectVariant('abstract')">
+                        <div class="variant-preview" style="background: linear-gradient(135deg, #e17055, #fdcb6e);">
+                            <i class="fas fa-shapes"></i>
+                        </div>
+                        <h5>Abstract Flow</h5>
+                        <p>Orange gradient motion</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section id="analytics" class="section analytics-section">
+            <div class="section-header">
+                <h2><i class="fas fa-chart-line"></i> Analytics Dashboard</h2>
+                <p>Track your book's performance across all platforms.</p>
+            </div>
+
+            <div class="analytics-grid">
+                <div class="chart-card large">
+                    <h4>Sales Over Time</h4>
+                    <div class="chart-placeholder">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h4>Traffic Sources</h4>
+                    <div class="chart-placeholder">
+                        <canvas id="trafficChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h4>Engagement by Platform</h4>
+                    <div class="chart-placeholder">
+                        <canvas id="engagementChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metrics-breakdown">
+                <h4>Detailed Metrics</h4>
+                <div class="metrics-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Platform</th>
+                                <th>Followers</th>
+                                <th>Engagement</th>
+                                <th>Clicks</th>
+                                <th>Conversions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><i class="fab fa-instagram"></i> Instagram</td>
+                                <td>8,432</td>
+                                <td>4.2%</td>
+                                <td>1,234</td>
+                                <td>89</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fab fa-tiktok"></i> TikTok</td>
+                                <td>12,891</td>
+                                <td>6.8%</td>
+                                <td>3,456</td>
+                                <td>156</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fab fa-x-twitter"></i> X/Twitter</td>
+                                <td>3,245</td>
+                                <td>2.1%</td>
+                                <td>567</td>
+                                <td>34</td>
+                            </tr>
+                            <tr>
+                                <td><i class="fab fa-amazon"></i> Amazon</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>2,890</td>
+                                <td>312</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Orders Section -->
+        <section id="orders" class="section orders-section">
+            <div class="section-header">
+                <h2><i class="fas fa-shopping-cart"></i> Book Orders & Links</h2>
+                <p>Manage your book sales and purchase links.</p>
+            </div>
+
+            <div class="order-links-grid">
+                <div class="order-link-card amazon">
+                    <div class="retailer-logo">
+                        <i class="fab fa-amazon"></i>
+                    </div>
+                    <h4>Amazon</h4>
+                    <input type="url" placeholder="Amazon product link" value="https://amazon.com/dp/B0XXXXXXXXX">
+                    <div class="link-stats">
+                        <span><i class="fas fa-mouse-pointer"></i> 2,890 clicks</span>
+                        <span><i class="fas fa-shopping-bag"></i> 312 orders</span>
+                    </div>
+                    <button class="copy-link"><i class="fas fa-copy"></i> Copy Link</button>
+                </div>
+
+                <div class="order-link-card barnes">
+                    <div class="retailer-logo">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4>Barnes & Noble</h4>
+                    <input type="url" placeholder="B&N product link">
+                    <div class="link-stats">
+                        <span><i class="fas fa-mouse-pointer"></i> 456 clicks</span>
+                        <span><i class="fas fa-shopping-bag"></i> 67 orders</span>
+                    </div>
+                    <button class="copy-link"><i class="fas fa-copy"></i> Copy Link</button>
+                </div>
+
+                <div class="order-link-card direct">
+                    <div class="retailer-logo">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h4>Direct Sales</h4>
+                    <input type="url" placeholder="Your website store link">
+                    <div class="link-stats">
+                        <span><i class="fas fa-mouse-pointer"></i> 890 clicks</span>
+                        <span><i class="fas fa-shopping-bag"></i> 123 orders</span>
+                    </div>
+                    <button class="copy-link"><i class="fas fa-copy"></i> Copy Link</button>
+                </div>
+
+                <div class="order-link-card signed">
+                    <div class="retailer-logo">
+                        <i class="fas fa-signature"></i>
+                    </div>
+                    <h4>Signed Copies</h4>
+                    <input type="url" placeholder="Signed copy order form">
+                    <div class="link-stats">
+                        <span><i class="fas fa-mouse-pointer"></i> 234 clicks</span>
+                        <span><i class="fas fa-shopping-bag"></i> 45 orders</span>
+                    </div>
+                    <button class="copy-link"><i class="fas fa-copy"></i> Copy Link</button>
+                </div>
+            </div>
+
+            <!-- ISBN & Book Details -->
+            <div class="book-details-card">
+                <h4>Book Details</h4>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <label>ISBN</label>
+                        <input type="text" value="9798893970265" readonly>
+                    </div>
+                    <div class="detail-item">
+                        <label>Price (USD)</label>
+                        <input type="text" value="$19.99">
+                    </div>
+                    <div class="detail-item">
+                        <label>Format</label>
+                        <input type="text" value="Paperback">
+                    </div>
+                    <div class="detail-item">
+                        <label>Pages</label>
+                        <input type="text" value="256">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Orders -->
+            <div class="recent-orders">
+                <h4>Recent Orders</h4>
+                <div class="orders-list">
+                    <div class="order-item">
+                        <div class="order-icon"><i class="fas fa-box"></i></div>
+                        <div class="order-details">
+                            <p class="order-id">#LL-2025-0892</p>
+                            <p class="order-customer">John D. - London, UK</p>
+                        </div>
+                        <div class="order-status shipped">Shipped</div>
+                        <div class="order-amount">$19.99</div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-icon"><i class="fas fa-box"></i></div>
+                        <div class="order-details">
+                            <p class="order-id">#LL-2025-0891</p>
+                            <p class="order-customer">Sarah M. - New York, USA</p>
+                        </div>
+                        <div class="order-status processing">Processing</div>
+                        <div class="order-amount">$24.99</div>
+                    </div>
+                    <div class="order-item">
+                        <div class="order-icon"><i class="fas fa-box"></i></div>
+                        <div class="order-details">
+                            <p class="order-id">#LL-2025-0890</p>
+                            <p class="order-customer">Mike R. - Sydney, AU</p>
+                        </div>
+                        <div class="order-status delivered">Delivered</div>
+                        <div class="order-amount">$19.99</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modals -->
+    <div id="postModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('postModal')">&times;</span>
+            <h3>Create New Post</h3>
+            <textarea placeholder="Write your post..."></textarea>
+            <button class="modal-btn">Post Now</button>
+        </div>
+    </div>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('videoModal')">&times;</span>
+            <h3>Create New Video</h3>
+            <p>Select a template or create from scratch</p>
+            <div class="video-templates">
+                <button class="template-btn">Book Trailer</button>
+                <button class="template-btn">Quote Card</button>
+                <button class="template-btn">Behind the Scenes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

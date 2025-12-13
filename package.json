@@ -1,0 +1,9 @@
+{
+  "name": "london-life",
+  "version": "1.0.0",
+  "description": "London Life - Author Command Center",
+  "scripts": {
+    "dev": "npx serve -l 3000",
+    "start": "npx serve -l 3000"
+  }
+}

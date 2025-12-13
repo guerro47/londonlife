@@ -1,54 +1,19 @@
 // London Life - Author Command Center JavaScript
 
 // ============================================
-// SECURE AUTHENTICATION SYSTEM
+// AUTHENTICATION CHECK
 // ============================================
 
 const AUTH_CONFIG = {
     sessionKey: 'londonlife_session',
-    maxAttempts: 5,
-    lockoutDuration: 15 * 60 * 1000, // 15 minutes
-    sessionDuration: 24 * 60 * 60 * 1000, // 24 hours
+    sessionDuration: 24 * 60 * 60 * 1000,
 };
-
-// Rate limiting storage
-let loginAttempts = {
-    count: 0,
-    lastAttempt: null,
-    lockedUntil: null
-};
-
-// Check if user is already authenticated on page load
-function checkAuthStatus() {
-    const session = getSession();
-    if (session && session.authenticated && !isSessionExpired(session)) {
-        // User is authenticated - hide login, show splash
-        document.getElementById('loginScreen').classList.add('hidden');
-        document.getElementById('splash').style.display = 'flex';
-        return true;
-    }
-    clearSession();
-    showLoginScreen();
-    return false;
-}
 
 function getSession() {
     try {
         const stored = localStorage.getItem(AUTH_CONFIG.sessionKey);
         return stored ? JSON.parse(stored) : null;
-    } catch {
-        return null;
-    }
-}
-
-function setSession(data) {
-    const session = {
-        authenticated: true,
-        timestamp: Date.now(),
-        expiresAt: Date.now() + AUTH_CONFIG.sessionDuration,
-        ...data
-    };
-    localStorage.setItem(AUTH_CONFIG.sessionKey, JSON.stringify(session));
+    } catch { return null; }
 }
 
 function clearSession() {
@@ -59,177 +24,31 @@ function isSessionExpired(session) {
     return !session.expiresAt || Date.now() > session.expiresAt;
 }
 
-function showLoginScreen() {
-    document.getElementById('loginScreen').classList.remove('hidden');
-    document.getElementById('splash').style.display = 'none';
-    document.getElementById('commandCenter').classList.remove('active');
-}
-
-function hideLoginScreen() {
-    document.getElementById('loginScreen').classList.add('hidden');
-    // Show the original splash screen after login
-    document.getElementById('splash').style.display = 'flex';
-}
-
-// Secure password hashing using Web Crypto API
-async function hashPassword(password, salt) {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(password + salt);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-// Check rate limiting
-function isRateLimited() {
-    if (loginAttempts.lockedUntil && Date.now() < loginAttempts.lockedUntil) {
-        const remaining = Math.ceil((loginAttempts.lockedUntil - Date.now()) / 60000);
-        return { limited: true, message: `Too many attempts. Try again in ${remaining} minute(s).` };
+function checkAuthStatus() {
+    const session = getSession();
+    if (!session || !session.authenticated || isSessionExpired(session)) {
+        clearSession();
+        window.location.href = 'login.html';
+        return false;
     }
-    if (loginAttempts.lockedUntil && Date.now() >= loginAttempts.lockedUntil) {
-        loginAttempts = { count: 0, lastAttempt: null, lockedUntil: null };
-    }
-    return { limited: false };
-}
-
-function recordLoginAttempt(success) {
-    if (success) {
-        loginAttempts = { count: 0, lastAttempt: null, lockedUntil: null };
-    } else {
-        loginAttempts.count++;
-        loginAttempts.lastAttempt = Date.now();
-        if (loginAttempts.count >= AUTH_CONFIG.maxAttempts) {
-            loginAttempts.lockedUntil = Date.now() + AUTH_CONFIG.lockoutDuration;
-        }
-    }
-}
-
-// Main login handler
-async function handleLogin(event) {
-    event.preventDefault();
-    
-    const email = document.getElementById('loginEmail').value.trim();
-    const password = document.getElementById('loginPassword').value;
-    const rememberMe = document.getElementById('rememberMe').checked;
-    const errorEl = document.getElementById('loginError');
-    const loginBtn = document.getElementById('loginBtn');
-    
-    // Clear previous errors
-    errorEl.textContent = '';
-    
-    // Check rate limiting
-    const rateLimit = isRateLimited();
-    if (rateLimit.limited) {
-        errorEl.textContent = rateLimit.message;
-        return;
-    }
-    
-    // Basic validation
-    if (!email || !password) {
-        errorEl.textContent = 'Please enter both email and password.';
-        return;
-    }
-    
-    // Show loading state
-    loginBtn.classList.add('loading');
-    loginBtn.disabled = true;
-    
-    try {
-        // Simulate async authentication (replace with real API call)
-        await new Promise(resolve => setTimeout(resolve, 800));
-        
-        // Demo credentials - REPLACE WITH REAL AUTHENTICATION
-        // In production, this should call your backend API
-        const validCredentials = await validateCredentials(email, password);
-        
-        if (validCredentials) {
-            recordLoginAttempt(true);
-            
-            // Set session
-            setSession({
-                email: email,
-                rememberMe: rememberMe,
-                loginTime: new Date().toISOString()
-            });
-            
-            // Hide login, show original splash screen
-            hideLoginScreen();
-            
-            showNotification('Welcome back, Artem!');
-        } else {
-            recordLoginAttempt(false);
-            const attemptsLeft = AUTH_CONFIG.maxAttempts - loginAttempts.count;
-            if (attemptsLeft > 0) {
-                errorEl.textContent = `Invalid credentials. ${attemptsLeft} attempt(s) remaining.`;
-            } else {
-                errorEl.textContent = 'Account locked. Try again in 15 minutes.';
-            }
-        }
-    } catch (err) {
-        errorEl.textContent = 'Authentication error. Please try again.';
-        console.error('Login error:', err);
-    } finally {
-        loginBtn.classList.remove('loading');
-        loginBtn.disabled = false;
-    }
-}
-
-// Credential validation (DEMO - replace with real backend auth)
-async function validateCredentials(email, password) {
-    // IMPORTANT: In production, NEVER store credentials client-side
-    // This should be an API call to your backend
-    // Demo credentials for testing:
-    const DEMO_EMAIL = 'artem@londonlife.com';
-    const DEMO_SALT = 'londonlife2025';
-    // Demo password: "LondonLife2025!" - hash generated with SHA-256
-    const DEMO_HASH = 'a1b2c3d4e5f6'; // Placeholder - will be set below
-    
-    // For demo purposes, accept these credentials:
-    // Email: artem@londonlife.com
-    // Password: LondonLife2025!
-    if (email.toLowerCase() === DEMO_EMAIL && password === 'LondonLife2025!') {
-        return true;
-    }
-    
-    return false;
+    return true;
 }
 
 function handleLogout() {
     if (confirm('Are you sure you want to sign out?')) {
         clearSession();
-        showLoginScreen();
-        document.getElementById('commandCenter').classList.remove('active');
-        showNotification('You have been signed out.');
+        window.location.href = 'login.html';
     }
 }
 
-function togglePasswordVisibility() {
-    const passwordInput = document.getElementById('loginPassword');
-    const toggleIcon = document.getElementById('passwordToggleIcon');
-    
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        toggleIcon.classList.remove('fa-eye');
-        toggleIcon.classList.add('fa-eye-slash');
-    } else {
-        passwordInput.type = 'password';
-        toggleIcon.classList.remove('fa-eye-slash');
-        toggleIcon.classList.add('fa-eye');
-    }
-}
-
-function showForgotPassword(event) {
-    event.preventDefault();
-    alert('Password reset functionality would be implemented here.\n\nContact: support@londonlife.com');
-}
-
-// Initialize auth check on page load
+// Check auth on page load
 document.addEventListener('DOMContentLoaded', function() {
     checkAuthStatus();
+    loadSavedContent();
 });
 
 // ============================================
-// END AUTHENTICATION SYSTEM
+// END AUTHENTICATION CHECK
 // ============================================
 
 // Splash Screen Enter
@@ -323,7 +142,6 @@ function generateVideo() {
     
     alert(`Video Generation Request Sent!\n\nPlatform: ${activeTab.toUpperCase()}\nDuration: ${duration}s\nAspect Ratio: ${aspect}\nStyle: ${style}\n\nPrompt: ${prompt.substring(0, 100)}...`);
     
-    // In production, this would call the respective AI API
     console.log('Video Generation:', { platform: activeTab, prompt, duration, aspect, style });
 }
 
@@ -422,20 +240,17 @@ document.querySelectorAll('.copy-link').forEach(btn => {
     });
 });
 
-// Initialize Charts (using placeholder since Chart.js would need to be loaded)
+// Initialize Charts
 function initCharts() {
     const salesCanvas = document.getElementById('salesChart');
     const trafficCanvas = document.getElementById('trafficChart');
     const engagementCanvas = document.getElementById('engagementChart');
     
-    // Placeholder chart visualization
     [salesCanvas, trafficCanvas, engagementCanvas].forEach(canvas => {
         if (canvas) {
             const ctx = canvas.getContext('2d');
             canvas.width = canvas.parentElement.offsetWidth;
             canvas.height = canvas.parentElement.offsetHeight;
-            
-            // Draw placeholder chart
             drawPlaceholderChart(ctx, canvas.width, canvas.height);
         }
     });
@@ -445,7 +260,6 @@ function drawPlaceholderChart(ctx, width, height) {
     ctx.fillStyle = '#2d2d2d';
     ctx.fillRect(0, 0, width, height);
     
-    // Draw grid lines
     ctx.strokeStyle = 'rgba(255,255,255,0.1)';
     ctx.lineWidth = 1;
     
@@ -457,7 +271,6 @@ function drawPlaceholderChart(ctx, width, height) {
         ctx.stroke();
     }
     
-    // Draw sample line chart
     ctx.strokeStyle = '#ff6b35';
     ctx.lineWidth = 3;
     ctx.beginPath();
@@ -475,7 +288,6 @@ function drawPlaceholderChart(ctx, width, height) {
     });
     ctx.stroke();
     
-    // Draw gradient fill
     const gradient = ctx.createLinearGradient(0, 0, 0, height);
     gradient.addColorStop(0, 'rgba(255, 107, 53, 0.3)');
     gradient.addColorStop(1, 'rgba(255, 107, 53, 0)');
@@ -511,14 +323,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // Keyboard shortcuts
 document.addEventListener('keydown', function(e) {
-    // ESC to close modals
     if (e.key === 'Escape') {
         document.querySelectorAll('.modal.active').forEach(modal => {
             modal.classList.remove('active');
         });
     }
     
-    // Enter to access command center from splash
     if (e.key === 'Enter' && document.getElementById('splash').style.display !== 'none') {
         enterCommandCenter();
     }
@@ -554,24 +364,19 @@ function handleFileUpload(files) {
     });
 }
 
-// Initialize on load
-document.addEventListener('DOMContentLoaded', function() {
-    loadSavedContent();
-    
-    // Add animation styles
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes slideOut {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-    `;
-    document.head.appendChild(style);
-});
+// Add animation styles
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+`;
+document.head.appendChild(style);
 
 // Video Card Click Handler
 document.querySelectorAll('.video-card:not(.add-new)').forEach(card => {

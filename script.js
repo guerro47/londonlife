@@ -66,9 +66,109 @@ function initializeApp() {
     initScheduleToggle();
     initVideoTabs();
     initStatCounters();
+    initTutorial();
     
     // Keyboard shortcuts
     document.addEventListener('keydown', handleKeyboard);
+}
+
+// ============================================
+// CMS TUTORIAL
+// ============================================
+
+let currentTutorialStep = 1;
+const totalTutorialSteps = 6;
+
+function initTutorial() {
+    // Check if user has seen tutorial before
+    const tutorialSeen = localStorage.getItem('londonlife_tutorial_seen');
+    
+    if (!tutorialSeen) {
+        // Show tutorial after splash screen
+        setTimeout(() => {
+            showTutorial();
+        }, 1000);
+    }
+    
+    // Add click handlers to dots
+    document.querySelectorAll('.tutorial-dots .dot').forEach(dot => {
+        dot.addEventListener('click', () => {
+            const step = parseInt(dot.dataset.step);
+            goToTutorialStep(step);
+        });
+    });
+}
+
+function showTutorial() {
+    const tutorial = document.getElementById('cmsTutorial');
+    if (tutorial) {
+        tutorial.classList.add('active');
+        currentTutorialStep = 1;
+        updateTutorialUI();
+    }
+}
+
+function hideTutorial() {
+    const tutorial = document.getElementById('cmsTutorial');
+    if (tutorial) {
+        tutorial.classList.remove('active');
+    }
+    
+    // Check if user wants to hide permanently
+    const dontShow = document.getElementById('dontShowTutorial');
+    if (dontShow && dontShow.checked) {
+        localStorage.setItem('londonlife_tutorial_seen', 'true');
+    }
+}
+
+function skipTutorial() {
+    // Mark as seen if checkbox is checked
+    const dontShow = document.getElementById('dontShowTutorial');
+    if (dontShow && dontShow.checked) {
+        localStorage.setItem('londonlife_tutorial_seen', 'true');
+    }
+    hideTutorial();
+}
+
+function nextTutorialStep() {
+    if (currentTutorialStep < totalTutorialSteps) {
+        currentTutorialStep++;
+        updateTutorialUI();
+    } else {
+        // Completed tutorial
+        localStorage.setItem('londonlife_tutorial_seen', 'true');
+        hideTutorial();
+        showNotification('Tutorial completed! You\'re all set to use the CMS.', 'success');
+    }
+}
+
+function goToTutorialStep(step) {
+    currentTutorialStep = step;
+    updateTutorialUI();
+}
+
+function updateTutorialUI() {
+    // Update steps
+    document.querySelectorAll('.tutorial-step').forEach(stepEl => {
+        stepEl.classList.remove('active');
+        if (parseInt(stepEl.dataset.step) === currentTutorialStep) {
+            stepEl.classList.add('active');
+        }
+    });
+    
+    // Update dots
+    document.querySelectorAll('.tutorial-dots .dot').forEach(dot => {
+        dot.classList.remove('active');
+        if (parseInt(dot.dataset.step) === currentTutorialStep) {
+            dot.classList.add('active');
+        }
+    });
+    
+    // Update button text on last step
+    const nextBtn = document.querySelector('.tutorial-btn-next span');
+    if (nextBtn) {
+        nextBtn.textContent = currentTutorialStep === totalTutorialSteps ? 'Get Started' : 'Next';
+    }
 }
 
 // ============================================
@@ -994,7 +1094,7 @@ const defaultCMSContent = {
         lead: 'Within the pages of this compelling memoir, Artem recounts a journey through betrayal and injustice in the bustling streets of London.',
         text: 'Through personal trials & triumphs, Artem discovers the unwavering strength of resilience & the transformative power of forgiveness. His story is a poignant reminder that even in the face of adversity, the human spirit has the capacity to overcome and thrive.',
         features: ['A story of resilience', 'Set in London', 'Memoir & Life Lessons'],
-        format: 'Paperback', pages: '256', isbn: '9798893970265', price: '$19.99'
+        format: 'Paperback', pages: '256', isbn: '9798893970265', price: '£15.99'
     },
     excerpt: {
         text: '"The streets of London taught me more about life than any classroom ever could. In the chaos of the city, I found my purpose. In the betrayal of those I trusted, I discovered my strength."',
@@ -1011,7 +1111,7 @@ const defaultCMSContent = {
         { stars: 5, text: 'A raw and honest account of life\'s challenges.', name: 'James K.', source: 'Goodreads' },
         { stars: 4.5, text: 'Beautifully written with vivid descriptions of London.', name: 'Emma L.', source: 'Book Blog' }
     ],
-    buy: { price: '$19.99', links: { amazon: '', barnes: '', direct: '', signed: '' } },
+    buy: { price: '£15.99', links: { amazon: '', barnes: '', direct: '', signed: '' } },
     newsletter: { title: 'Stay Connected', text: 'Subscribe to receive updates and news.' },
     contact: { email: 'contact@londonlife-book.com', location: 'London, United Kingdom' }
 };

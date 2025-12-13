@@ -231,7 +231,7 @@
                     <div class="cms-field"><label>Format</label><input type="text" id="cms-about-format" placeholder="Paperback"></div>
                     <div class="cms-field"><label>Pages</label><input type="text" id="cms-about-pages" placeholder="256"></div>
                     <div class="cms-field"><label>ISBN</label><input type="text" id="cms-about-isbn" placeholder="9798893970265"></div>
-                    <div class="cms-field"><label>Price</label><input type="text" id="cms-about-price" placeholder="$19.99"></div>
+                    <div class="cms-field"><label>Price</label><input type="text" id="cms-about-price" placeholder="£15.99"></div>
                 </div>
             </div>
 
@@ -263,7 +263,7 @@
 
             <div class="cms-panel" id="cms-buy">
                 <div class="cms-grid">
-                    <div class="cms-field"><label>Display Price</label><input type="text" id="cms-buy-price" placeholder="$19.99"></div>
+                    <div class="cms-field"><label>Display Price</label><input type="text" id="cms-buy-price" placeholder="£15.99"></div>
                     <div class="cms-field full-width"><label><i class="fab fa-amazon"></i> Amazon</label><input type="url" id="cms-buy-amazon"></div>
                     <div class="cms-field full-width"><label><i class="fas fa-book"></i> Barnes & Noble</label><input type="url" id="cms-buy-barnes"></div>
                     <div class="cms-field full-width"><label><i class="fas fa-store"></i> Direct</label><input type="url" id="cms-buy-direct"></div>
@@ -822,7 +822,7 @@
                     </div>
                     <div class="detail-item">
                         <label>Price</label>
-                        <input type="text" value="$19.99">
+                        <input type="text" value="£15.99">
                     </div>
                     <div class="detail-item">
                         <label>Format</label>
@@ -845,25 +845,25 @@
                             <p class="order-customer">John D. - London, UK</p>
                         </div>
                         <div class="order-status shipped">Shipped</div>
-                        <div class="order-amount">$19.99</div>
+                        <div class="order-amount">£15.99</div>
                     </div>
                     <div class="order-item">
                         <div class="order-icon"><i class="fas fa-box"></i></div>
                         <div class="order-details">
                             <p class="order-id">#LL-2025-0891</p>
-                            <p class="order-customer">Sarah M. - New York</p>
+                            <p class="order-customer">Sarah M. - Manchester</p>
                         </div>
                         <div class="order-status processing">Processing</div>
-                        <div class="order-amount">$24.99</div>
+                        <div class="order-amount">£19.99</div>
                     </div>
                     <div class="order-item">
                         <div class="order-icon"><i class="fas fa-box"></i></div>
                         <div class="order-details">
                             <p class="order-id">#LL-2025-0890</p>
-                            <p class="order-customer">Mike R. - Sydney</p>
+                            <p class="order-customer">Mike R. - Birmingham</p>
                         </div>
                         <div class="order-status delivered">Delivered</div>
-                        <div class="order-amount">$19.99</div>
+                        <div class="order-amount">£15.99</div>
                     </div>
                 </div>
             </div>
@@ -986,6 +986,99 @@
                 <i class="fas fa-cloud-upload-alt"></i>
                 <p>Drag & drop files here or click to browse</p>
                 <input type="file" id="modalUploadInput" multiple accept="image/*,video/*">
+            </div>
+        </div>
+    </div>
+
+    <!-- CMS Tutorial Overlay -->
+    <div id="cmsTutorial" class="tutorial-overlay">
+        <div class="tutorial-backdrop"></div>
+        <div class="tutorial-content">
+            <div class="tutorial-header">
+                <div class="tutorial-logo">
+                    <img src="logo1.JPG" alt="AA">
+                </div>
+                <h2>Welcome to Your Command Center, Artem!</h2>
+                <p>Let's take a quick tour of your CMS features</p>
+            </div>
+            
+            <div class="tutorial-steps">
+                <div class="tutorial-step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3><i class="fas fa-home"></i> Dashboard Overview</h3>
+                        <p>Your dashboard shows real-time stats including book sales, social followers, page views, and reviews. Use the navigation on the left to access different sections.</p>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3><i class="fas fa-edit"></i> Landing Page CMS</h3>
+                        <p>Control everything your visitors see! Edit hero text, about section, book details, reviews, prices, and buy links. Changes appear on your live site instantly.</p>
+                        <ul class="tutorial-list">
+                            <li><strong>Hero:</strong> Main headline and description</li>
+                            <li><strong>About:</strong> Book synopsis and features</li>
+                            <li><strong>Reviews:</strong> Manage customer testimonials</li>
+                            <li><strong>Buy Links:</strong> Amazon, Direct sales, etc.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3><i class="fas fa-images"></i> Media Library</h3>
+                        <p>Upload and manage all your images and videos. Drag & drop files or click to upload. Use these assets across your site and social posts.</p>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3><i class="fas fa-share-alt"></i> Social Media Composer</h3>
+                        <p>Create and schedule posts for Instagram, TikTok, Twitter, Facebook, and more. Use the <strong>AI Assist</strong> button to generate engaging captions automatically!</p>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step" data-step="5">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3><i class="fas fa-video"></i> Videos & Reels Studio</h3>
+                        <p>Generate video content with AI tools like Grok, Runway ML, Pika Labs, and OpenAI Sora. Perfect for creating book trailers and promotional reels.</p>
+                    </div>
+                </div>
+                
+                <div class="tutorial-step" data-step="6">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3><i class="fas fa-chart-line"></i> Analytics & Orders</h3>
+                        <p>Track your performance with detailed analytics. Monitor sales, track orders, and export your newsletter subscriber list.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tutorial-nav">
+                <button class="tutorial-btn-skip" onclick="skipTutorial()">Skip Tutorial</button>
+                <div class="tutorial-dots">
+                    <span class="dot active" data-step="1"></span>
+                    <span class="dot" data-step="2"></span>
+                    <span class="dot" data-step="3"></span>
+                    <span class="dot" data-step="4"></span>
+                    <span class="dot" data-step="5"></span>
+                    <span class="dot" data-step="6"></span>
+                </div>
+                <button class="tutorial-btn-next" onclick="nextTutorialStep()">
+                    <span>Next</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+            
+            <div class="tutorial-footer">
+                <label class="dont-show-again">
+                    <input type="checkbox" id="dontShowTutorial">
+                    <span>Don't show this again</span>
+                </label>
             </div>
         </div>
     </div>

@@ -66,7 +66,7 @@ const defaultContent = {
         format: 'Paperback',
         pages: '256',
         isbn: '9798893970265',
-        price: '$19.99'
+        price: '£15.99'
     },
     excerpt: {
         text: '"The streets of London taught me more about life than any classroom ever could. In the chaos of the city, I found my purpose. In the betrayal of those I trusted, I discovered my strength."',
@@ -104,7 +104,7 @@ const defaultContent = {
         }
     ],
     buy: {
-        price: '$19.99',
+        price: '£15.99',
         links: {
             amazon: 'https://amazon.com/dp/B0XXXXXXXXX',
             barnes: '',

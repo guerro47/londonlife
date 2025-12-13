@@ -9,11 +9,11 @@ const AUTH_CONFIG = {
 
 let loginAttempts = { count: 0, lastAttempt: null, lockedUntil: null };
 
-// Check if already authenticated - redirect to main app
+// Check if already authenticated - redirect to admin
 function checkAuthOnLogin() {
     const session = getSession();
     if (session && session.authenticated && !isSessionExpired(session)) {
-        window.location.href = 'index.html';
+        window.location.href = 'admin.html';
     }
 }
 
@@ -94,7 +94,7 @@ async function handleLogin(event) {
         if (validCredentials) {
             recordLoginAttempt(true);
             setSession({ email, rememberMe, loginTime: new Date().toISOString() });
-            window.location.href = 'index.html';
+            window.location.href = 'admin.html';
         } else {
             recordLoginAttempt(false);
             const attemptsLeft = AUTH_CONFIG.maxAttempts - loginAttempts.count;

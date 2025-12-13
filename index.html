@@ -107,6 +107,7 @@
             </div>
             <ul class="nav-links">
                 <li><a href="#dashboard" class="active" onclick="scrollToSection('dashboard')">Dashboard</a></li>
+                <li><a href="#landing-cms" onclick="scrollToSection('landing-cms')">Landing Page</a></li>
                 <li><a href="#media" onclick="scrollToSection('media')">Media</a></li>
                 <li><a href="#content" onclick="scrollToSection('content')">Content</a></li>
                 <li><a href="#social" onclick="scrollToSection('social')">Social</a></li>
@@ -182,6 +183,111 @@
                         <i class="fas fa-video"></i> Create Video
                     </button>
                 </div>
+            </div>
+        </section>
+
+        <!-- Landing Page CMS Section -->
+        <section id="landing-cms" class="section landing-cms-section">
+            <div class="section-header">
+                <h2><i class="fas fa-globe"></i> Landing Page Manager</h2>
+                <p>Control your public customer-facing landing page content.</p>
+                <a href="landing.html" target="_blank" class="preview-link">
+                    <i class="fas fa-external-link-alt"></i> View Live Landing Page
+                </a>
+            </div>
+
+            <div class="cms-tabs">
+                <button class="cms-tab active" onclick="switchCMSTab('hero')">Hero</button>
+                <button class="cms-tab" onclick="switchCMSTab('about')">About</button>
+                <button class="cms-tab" onclick="switchCMSTab('excerpt')">Excerpt</button>
+                <button class="cms-tab" onclick="switchCMSTab('author')">Author</button>
+                <button class="cms-tab" onclick="switchCMSTab('reviews')">Reviews</button>
+                <button class="cms-tab" onclick="switchCMSTab('buy')">Buy Links</button>
+                <button class="cms-tab" onclick="switchCMSTab('newsletter')">Newsletter</button>
+            </div>
+
+            <div class="cms-panel active" id="cms-hero">
+                <div class="cms-grid">
+                    <div class="cms-field"><label>Badge Text</label><input type="text" id="cms-hero-badge" placeholder="NEW RELEASE"></div>
+                    <div class="cms-field"><label>Title Line 1</label><input type="text" id="cms-hero-title1" placeholder="LONDON"></div>
+                    <div class="cms-field"><label>Title Line 2</label><input type="text" id="cms-hero-title2" placeholder="LIFE"></div>
+                    <div class="cms-field"><label>Subtitle</label><input type="text" id="cms-hero-subtitle" placeholder="Be Good To People"></div>
+                    <div class="cms-field full-width"><label>Description</label><textarea id="cms-hero-description" rows="3" placeholder="A compelling memoir about..."></textarea></div>
+                    <div class="cms-field"><label>CTA Text</label><input type="text" id="cms-hero-cta" placeholder="Order Now"></div>
+                    <div class="cms-field"><label>Sales Stat</label><input type="text" id="cms-hero-sales" placeholder="1,200+"></div>
+                    <div class="cms-field"><label>Rating</label><input type="text" id="cms-hero-rating" placeholder="4.8"></div>
+                    <div class="cms-field"><label>Reviews Count</label><input type="text" id="cms-hero-reviews" placeholder="150+"></div>
+                </div>
+            </div>
+
+            <div class="cms-panel" id="cms-about">
+                <div class="cms-grid">
+                    <div class="cms-field full-width"><label>Section Title</label><input type="text" id="cms-about-title" placeholder="A Journey Through Adversity"></div>
+                    <div class="cms-field full-width"><label>Lead Text</label><textarea id="cms-about-lead" rows="2"></textarea></div>
+                    <div class="cms-field full-width"><label>Main Text</label><textarea id="cms-about-text" rows="4"></textarea></div>
+                    <div class="cms-field"><label>Feature 1</label><input type="text" id="cms-about-feature1"></div>
+                    <div class="cms-field"><label>Feature 2</label><input type="text" id="cms-about-feature2"></div>
+                    <div class="cms-field"><label>Feature 3</label><input type="text" id="cms-about-feature3"></div>
+                    <div class="cms-field"><label>Format</label><input type="text" id="cms-about-format" placeholder="Paperback"></div>
+                    <div class="cms-field"><label>Pages</label><input type="text" id="cms-about-pages" placeholder="256"></div>
+                    <div class="cms-field"><label>ISBN</label><input type="text" id="cms-about-isbn" placeholder="9798893970265"></div>
+                    <div class="cms-field"><label>Price</label><input type="text" id="cms-about-price" placeholder="$19.99"></div>
+                </div>
+            </div>
+
+            <div class="cms-panel" id="cms-excerpt">
+                <div class="cms-grid">
+                    <div class="cms-field full-width"><label>Featured Excerpt</label><textarea id="cms-excerpt-text" rows="5"></textarea></div>
+                    <div class="cms-field"><label>Chapter Name</label><input type="text" id="cms-excerpt-chapter" placeholder="New Beginnings"></div>
+                </div>
+            </div>
+
+            <div class="cms-panel" id="cms-author">
+                <div class="cms-grid">
+                    <div class="cms-field full-width"><label>Author Name</label><input type="text" id="cms-author-name" placeholder="Artem Artemenko"></div>
+                    <div class="cms-field full-width"><label>Bio</label><textarea id="cms-author-bio" rows="4"></textarea></div>
+                    <div class="cms-field full-width"><label>Extended Bio</label><textarea id="cms-author-bio-ext" rows="3"></textarea></div>
+                    <div class="cms-field"><label>Instagram</label><input type="url" id="cms-author-instagram"></div>
+                    <div class="cms-field"><label>TikTok</label><input type="url" id="cms-author-tiktok"></div>
+                    <div class="cms-field"><label>X/Twitter</label><input type="url" id="cms-author-twitter"></div>
+                    <div class="cms-field"><label>Amazon Page</label><input type="url" id="cms-author-amazon"></div>
+                </div>
+            </div>
+
+            <div class="cms-panel" id="cms-reviews">
+                <div class="reviews-manager">
+                    <div class="reviews-list" id="cmsReviewsList"></div>
+                    <button class="add-review-btn" onclick="addNewReview()"><i class="fas fa-plus"></i> Add Review</button>
+                </div>
+            </div>
+
+            <div class="cms-panel" id="cms-buy">
+                <div class="cms-grid">
+                    <div class="cms-field"><label>Display Price</label><input type="text" id="cms-buy-price" placeholder="$19.99"></div>
+                    <div class="cms-field full-width"><label><i class="fab fa-amazon"></i> Amazon</label><input type="url" id="cms-buy-amazon"></div>
+                    <div class="cms-field full-width"><label><i class="fas fa-book"></i> Barnes & Noble</label><input type="url" id="cms-buy-barnes"></div>
+                    <div class="cms-field full-width"><label><i class="fas fa-store"></i> Direct</label><input type="url" id="cms-buy-direct"></div>
+                    <div class="cms-field full-width"><label><i class="fas fa-signature"></i> Signed</label><input type="url" id="cms-buy-signed"></div>
+                </div>
+            </div>
+
+            <div class="cms-panel" id="cms-newsletter">
+                <div class="cms-grid">
+                    <div class="cms-field full-width"><label>Title</label><input type="text" id="cms-newsletter-title" placeholder="Stay Connected"></div>
+                    <div class="cms-field full-width"><label>Description</label><textarea id="cms-newsletter-text" rows="2"></textarea></div>
+                    <div class="cms-field"><label>Contact Email</label><input type="email" id="cms-contact-email"></div>
+                    <div class="cms-field"><label>Location</label><input type="text" id="cms-contact-location" placeholder="London, UK"></div>
+                </div>
+                <div class="subscribers-section">
+                    <h4>Subscribers (<span id="subscriberCount">0</span>)</h4>
+                    <div class="subscribers-list" id="subscribersList"></div>
+                    <button class="export-btn" onclick="exportSubscribers()"><i class="fas fa-download"></i> Export CSV</button>
+                </div>
+            </div>
+
+            <div class="cms-actions">
+                <button class="cms-save-btn" onclick="saveCMSContent()"><i class="fas fa-save"></i> Save & Publish</button>
+                <button class="cms-reset-btn" onclick="resetCMSContent()"><i class="fas fa-undo"></i> Reset</button>
             </div>
         </section>
 

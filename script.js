@@ -970,4 +970,284 @@ function shareImage() {
     }
 }
 
+// ============================================
+// CMS FUNCTIONS FOR LANDING PAGE
+// ============================================
+
+const CMS_STORAGE_KEY = 'londonlife_cms';
+let cmsReviews = [];
+
+// Default CMS content
+const defaultCMSContent = {
+    hero: {
+        badge: 'NEW RELEASE',
+        titleLine1: 'LONDON',
+        titleLine2: 'LIFE',
+        subtitle: 'Be Good To People',
+        author: 'Artem Artemenko',
+        description: 'A compelling memoir about resilience, forgiveness, and the unwavering strength of the human spirit in the bustling streets of London.',
+        ctaText: 'Order Now',
+        stats: { sales: '1,200+', rating: '4.8', reviews: '150+' }
+    },
+    about: {
+        title: 'A Journey Through Adversity',
+        lead: 'Within the pages of this compelling memoir, Artem recounts a journey through betrayal and injustice in the bustling streets of London.',
+        text: 'Through personal trials & triumphs, Artem discovers the unwavering strength of resilience & the transformative power of forgiveness. His story is a poignant reminder that even in the face of adversity, the human spirit has the capacity to overcome and thrive.',
+        features: ['A story of resilience', 'Set in London', 'Memoir & Life Lessons'],
+        format: 'Paperback', pages: '256', isbn: '9798893970265', price: '$19.99'
+    },
+    excerpt: {
+        text: '"The streets of London taught me more about life than any classroom ever could. In the chaos of the city, I found my purpose. In the betrayal of those I trusted, I discovered my strength."',
+        chapter: 'New Beginnings'
+    },
+    author: {
+        name: 'Artem Artemenko',
+        bio: 'Artem Artemenko is a London-based author whose debut memoir "London Life: Be Good To People" captures the essence of resilience and human spirit.',
+        bioExtended: 'Born with a passion for storytelling, Artem uses his experiences to inspire others to embrace life\'s challenges.',
+        social: { instagram: '', tiktok: '', twitter: '', amazon: '' }
+    },
+    reviews: [
+        { stars: 5, text: 'An incredibly moving story that stayed with me long after I finished reading.', name: 'Sarah M.', source: 'Amazon Review' },
+        { stars: 5, text: 'A raw and honest account of life\'s challenges.', name: 'James K.', source: 'Goodreads' },
+        { stars: 4.5, text: 'Beautifully written with vivid descriptions of London.', name: 'Emma L.', source: 'Book Blog' }
+    ],
+    buy: { price: '$19.99', links: { amazon: '', barnes: '', direct: '', signed: '' } },
+    newsletter: { title: 'Stay Connected', text: 'Subscribe to receive updates and news.' },
+    contact: { email: 'contact@londonlife-book.com', location: 'London, United Kingdom' }
+};
+
+function switchCMSTab(tabName) {
+    document.querySelectorAll('.cms-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.cms-panel').forEach(p => p.classList.remove('active'));
+    
+    document.querySelector(`.cms-tab[onclick="switchCMSTab('${tabName}')"]`).classList.add('active');
+    document.getElementById(`cms-${tabName}`).classList.add('active');
+}
+
+function loadCMSToForm() {
+    const content = JSON.parse(localStorage.getItem(CMS_STORAGE_KEY)) || defaultCMSContent;
+    
+    // Hero
+    setValue('cms-hero-badge', content.hero?.badge);
+    setValue('cms-hero-title1', content.hero?.titleLine1);
+    setValue('cms-hero-title2', content.hero?.titleLine2);
+    setValue('cms-hero-subtitle', content.hero?.subtitle);
+    setValue('cms-hero-description', content.hero?.description);
+    setValue('cms-hero-cta', content.hero?.ctaText);
+    setValue('cms-hero-sales', content.hero?.stats?.sales);
+    setValue('cms-hero-rating', content.hero?.stats?.rating);
+    setValue('cms-hero-reviews', content.hero?.stats?.reviews);
+    
+    // About
+    setValue('cms-about-title', content.about?.title);
+    setValue('cms-about-lead', content.about?.lead);
+    setValue('cms-about-text', content.about?.text);
+    setValue('cms-about-feature1', content.about?.features?.[0]);
+    setValue('cms-about-feature2', content.about?.features?.[1]);
+    setValue('cms-about-feature3', content.about?.features?.[2]);
+    setValue('cms-about-format', content.about?.format);
+    setValue('cms-about-pages', content.about?.pages);
+    setValue('cms-about-isbn', content.about?.isbn);
+    setValue('cms-about-price', content.about?.price);
+    
+    // Excerpt
+    setValue('cms-excerpt-text', content.excerpt?.text);
+    setValue('cms-excerpt-chapter', content.excerpt?.chapter);
+    
+    // Author
+    setValue('cms-author-name', content.author?.name);
+    setValue('cms-author-bio', content.author?.bio);
+    setValue('cms-author-bio-ext', content.author?.bioExtended);
+    setValue('cms-author-instagram', content.author?.social?.instagram);
+    setValue('cms-author-tiktok', content.author?.social?.tiktok);
+    setValue('cms-author-twitter', content.author?.social?.twitter);
+    setValue('cms-author-amazon', content.author?.social?.amazon);
+    
+    // Buy
+    setValue('cms-buy-price', content.buy?.price);
+    setValue('cms-buy-amazon', content.buy?.links?.amazon);
+    setValue('cms-buy-barnes', content.buy?.links?.barnes);
+    setValue('cms-buy-direct', content.buy?.links?.direct);
+    setValue('cms-buy-signed', content.buy?.links?.signed);
+    
+    // Newsletter
+    setValue('cms-newsletter-title', content.newsletter?.title);
+    setValue('cms-newsletter-text', content.newsletter?.text);
+    setValue('cms-contact-email', content.contact?.email);
+    setValue('cms-contact-location', content.contact?.location);
+    
+    // Reviews
+    cmsReviews = content.reviews || [];
+    renderCMSReviews();
+    
+    // Load subscribers
+    loadSubscribers();
+}
+
+function setValue(id, value) {
+    const el = document.getElementById(id);
+    if (el && value !== undefined) el.value = value;
+}
+
+function getValue(id) {
+    const el = document.getElementById(id);
+    return el ? el.value : '';
+}
+
+function saveCMSContent() {
+    const content = {
+        hero: {
+            badge: getValue('cms-hero-badge'),
+            titleLine1: getValue('cms-hero-title1'),
+            titleLine2: getValue('cms-hero-title2'),
+            subtitle: getValue('cms-hero-subtitle'),
+            author: getValue('cms-author-name'),
+            description: getValue('cms-hero-description'),
+            ctaText: getValue('cms-hero-cta'),
+            stats: {
+                sales: getValue('cms-hero-sales'),
+                rating: getValue('cms-hero-rating'),
+                reviews: getValue('cms-hero-reviews')
+            }
+        },
+        about: {
+            title: getValue('cms-about-title'),
+            lead: getValue('cms-about-lead'),
+            text: getValue('cms-about-text'),
+            features: [getValue('cms-about-feature1'), getValue('cms-about-feature2'), getValue('cms-about-feature3')],
+            format: getValue('cms-about-format'),
+            pages: getValue('cms-about-pages'),
+            isbn: getValue('cms-about-isbn'),
+            price: getValue('cms-about-price')
+        },
+        excerpt: {
+            text: getValue('cms-excerpt-text'),
+            chapter: getValue('cms-excerpt-chapter')
+        },
+        author: {
+            name: getValue('cms-author-name'),
+            bio: getValue('cms-author-bio'),
+            bioExtended: getValue('cms-author-bio-ext'),
+            social: {
+                instagram: getValue('cms-author-instagram'),
+                tiktok: getValue('cms-author-tiktok'),
+                twitter: getValue('cms-author-twitter'),
+                amazon: getValue('cms-author-amazon')
+            }
+        },
+        reviews: cmsReviews,
+        buy: {
+            price: getValue('cms-buy-price'),
+            links: {
+                amazon: getValue('cms-buy-amazon'),
+                barnes: getValue('cms-buy-barnes'),
+                direct: getValue('cms-buy-direct'),
+                signed: getValue('cms-buy-signed')
+            }
+        },
+        newsletter: {
+            title: getValue('cms-newsletter-title'),
+            text: getValue('cms-newsletter-text')
+        },
+        contact: {
+            email: getValue('cms-contact-email'),
+            location: getValue('cms-contact-location')
+        }
+    };
+    
+    localStorage.setItem(CMS_STORAGE_KEY, JSON.stringify(content));
+    showNotification('Landing page content saved & published!');
+}
+
+function resetCMSContent() {
+    if (confirm('Reset all landing page content to defaults?')) {
+        localStorage.removeItem(CMS_STORAGE_KEY);
+        loadCMSToForm();
+        showNotification('Content reset to defaults');
+    }
+}
+
+function renderCMSReviews() {
+    const container = document.getElementById('cmsReviewsList');
+    if (!container) return;
+    
+    container.innerHTML = cmsReviews.map((review, index) => `
+        <div class="review-item" data-index="${index}">
+            <div class="review-item-header">
+                <input type="text" value="${review.name}" placeholder="Reviewer name" onchange="updateReview(${index}, 'name', this.value)">
+                <select onchange="updateReview(${index}, 'stars', parseFloat(this.value))">
+                    <option value="5" ${review.stars === 5 ? 'selected' : ''}>5 Stars</option>
+                    <option value="4.5" ${review.stars === 4.5 ? 'selected' : ''}>4.5 Stars</option>
+                    <option value="4" ${review.stars === 4 ? 'selected' : ''}>4 Stars</option>
+                    <option value="3.5" ${review.stars === 3.5 ? 'selected' : ''}>3.5 Stars</option>
+                    <option value="3" ${review.stars === 3 ? 'selected' : ''}>3 Stars</option>
+                </select>
+            </div>
+            <textarea placeholder="Review text" onchange="updateReview(${index}, 'text', this.value)">${review.text}</textarea>
+            <div class="review-item-footer">
+                <input type="text" value="${review.source}" placeholder="Source (Amazon, Goodreads)" onchange="updateReview(${index}, 'source', this.value)">
+                <button class="delete-review-btn" onclick="deleteReview(${index})"><i class="fas fa-trash"></i></button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function addNewReview() {
+    cmsReviews.push({ stars: 5, text: '', name: '', source: '' });
+    renderCMSReviews();
+}
+
+function updateReview(index, field, value) {
+    cmsReviews[index][field] = value;
+}
+
+function deleteReview(index) {
+    cmsReviews.splice(index, 1);
+    renderCMSReviews();
+}
+
+function loadSubscribers() {
+    const subscribers = JSON.parse(localStorage.getItem('londonlife_subscribers') || '[]');
+    const container = document.getElementById('subscribersList');
+    const countEl = document.getElementById('subscriberCount');
+    
+    if (!container) return;
+    
+    countEl.textContent = subscribers.length;
+    
+    if (subscribers.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-dim);">No subscribers yet.</p>';
+        return;
+    }
+    
+    container.innerHTML = subscribers.map(email => `
+        <div class="subscriber-item">
+            <span>${email}</span>
+        </div>
+    `).join('');
+}
+
+function exportSubscribers() {
+    const subscribers = JSON.parse(localStorage.getItem('londonlife_subscribers') || '[]');
+    if (subscribers.length === 0) {
+        showNotification('No subscribers to export');
+        return;
+    }
+    
+    const csv = 'Email\n' + subscribers.join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'london-life-subscribers.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+    showNotification('Subscribers exported!');
+}
+
+// Initialize CMS on load
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(loadCMSToForm, 100);
+});
+
 console.log('London Life Command Center - HD Version Initialized');

@@ -52,21 +52,46 @@
                 <span class="logo-text">ARTEM ARTEMENKO</span>
             </a>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#books">Books</a></li>
-                <li><a href="#author">The Author</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#buy" class="nav-cta">Get the Book</a></li>
+                <li><a href="#page-home" class="nav-page-link" data-page="0"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#page-about" class="nav-page-link" data-page="1"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="#page-books" class="nav-page-link" data-page="2"><i class="fas fa-book"></i> Books</a></li>
+                <li><a href="#page-author" class="nav-page-link" data-page="3"><i class="fas fa-pen-fancy"></i> The Author</a></li>
+                <li><a href="#page-contact" class="nav-page-link" data-page="4"><i class="fas fa-envelope"></i> Contact</a></li>
+                <li><a href="#page-buy" class="nav-cta nav-page-link" data-page="5"><i class="fas fa-shopping-cart"></i> Get the Book</a></li>
             </ul>
+            <div class="page-indicators" id="pageIndicators">
+                <span class="indicator active" data-page="0"></span>
+                <span class="indicator" data-page="1"></span>
+                <span class="indicator" data-page="2"></span>
+                <span class="indicator" data-page="3"></span>
+                <span class="indicator" data-page="4"></span>
+                <span class="indicator" data-page="5"></span>
+            </div>
             <button class="nav-toggle" onclick="toggleNav()">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
+    <!-- Book Navigation Controls -->
+    <div class="book-controls">
+        <button class="book-nav-btn prev-btn" id="prevPageBtn" onclick="navigatePage(-1)">
+            <i class="fas fa-chevron-left"></i>
+            <span>Previous</span>
+        </button>
+        <button class="book-nav-btn next-btn" id="nextPageBtn" onclick="navigatePage(1)">
+            <span>Next</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- Book Container with Pages -->
+    <div class="book-container-wrapper">
+        <div class="book-pages" id="bookPages">
+            <!-- Page 1: Home -->
+            <div class="book-page active" id="page-home" data-page="0">
+                <!-- Hero Section -->
+                <section id="home" class="hero-section page-content">
         <div class="hero-bg">
             <div class="hero-bg-image"></div>
             <div class="hero-overlay"></div>
@@ -113,10 +138,13 @@
             <span>Scroll to explore</span>
             <i class="fas fa-chevron-down"></i>
         </div>
-    </section>
+                </section>
+            </div>
 
-    <!-- About Section (Brief) -->
-    <section id="about" class="about-section">
+            <!-- Page 2: About -->
+            <div class="book-page" id="page-about" data-page="1">
+                <!-- About Section (Brief) -->
+                <section id="about" class="about-section page-content">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">WELCOME</span>
@@ -150,10 +178,13 @@
                 </div>
             </div>
         </div>
-    </section>
+                </section>
+            </div>
 
-    <!-- Books Section -->
-    <section id="books" class="books-section">
+            <!-- Page 3: Books -->
+            <div class="book-page" id="page-books" data-page="2">
+                <!-- Books Section -->
+                <section id="books" class="books-section page-content">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">MY WORK</span>
@@ -213,10 +244,13 @@
                 </div>
             </div>
         </div>
-    </section>
+                </section>
+            </div>
 
-    <!-- Featured Excerpt -->
-    <section class="excerpt-section">
+            <!-- Page 4: The Author -->
+            <div class="book-page" id="page-author" data-page="3">
+                <!-- Featured Excerpt -->
+                <section class="excerpt-section page-content">
         <div class="container">
             <div class="excerpt-card">
                 <div class="excerpt-quote">
@@ -228,10 +262,10 @@
                 <cite>— From Chapter 1, "New Beginnings"</cite>
             </div>
         </div>
-    </section>
+                </section>
 
-    <!-- Author Section -->
-    <section id="author" class="author-section">
+                <!-- Author Section -->
+                <section id="author" class="author-section page-content">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">THE AUTHOR</span>
@@ -260,10 +294,13 @@
                 </div>
             </div>
         </div>
-    </section>
+                </section>
+            </div>
 
-    <!-- Reviews Section -->
-    <section id="reviews" class="reviews-section">
+            <!-- Page 5: Contact -->
+            <div class="book-page" id="page-contact" data-page="4">
+                <!-- Reviews Section -->
+                <section id="reviews" class="reviews-section page-content">
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">READER REVIEWS</span>
@@ -314,10 +351,13 @@
                 </div>
             </div>
         </div>
-    </section>
+                </section>
+            </div>
 
-    <!-- Buy Section -->
-    <section id="buy" class="buy-section">
+            <!-- Page 6: Buy -->
+            <div class="book-page" id="page-buy" data-page="5">
+                <!-- Buy Section -->
+                <section id="buy" class="buy-section page-content">
         <div class="container">
             <div class="section-header light">
                 <span class="section-tag">GET YOUR COPY</span>
@@ -367,10 +407,10 @@
                 </div>
             </div>
         </div>
-    </section>
+                </section>
 
-    <!-- Contact / Newsletter Section -->
-    <section id="contact" class="newsletter-section">
+                <!-- Contact / Newsletter Section -->
+                <section id="contact" class="newsletter-section page-content">
         <div class="container">
             <div class="newsletter-card">
                 <div class="newsletter-content">
@@ -385,7 +425,10 @@
                 </form>
             </div>
         </div>
-    </section>
+                </section>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="landing-footer">

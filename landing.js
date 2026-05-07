@@ -259,6 +259,95 @@ function generateStars(rating) {
     return stars;
 }
 
+// ==========================================
+// BOOK PAGE NAVIGATION
+// ==========================================
+
+let currentPage = 0;
+const totalPages = 6; // Home, About, Books, Author, Contact, Buy
+
+function navigatePage(direction) {
+    const newPage = currentPage + direction;
+    
+    if (newPage < 0 || newPage >= totalPages) return;
+    
+    goToPage(newPage);
+}
+
+function goToPage(pageIndex) {
+    if (pageIndex < 0 || pageIndex >= totalPages) return;
+    
+    const pages = document.querySelectorAll('.book-page');
+    const indicators = document.querySelectorAll('.indicator');
+    const prevBtn = document.getElementById('prevPageBtn');
+    const nextBtn = document.getElementById('nextPageBtn');
+    
+    // Update page states
+    pages.forEach((page, index) => {
+        page.classList.remove('active', 'flipped');
+        
+        if (index === pageIndex) {
+            page.classList.add('active');
+        } else if (index < pageIndex) {
+            page.classList.add('flipped');
+        }
+    });
+    
+    // Update indicators
+    indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === pageIndex);
+    });
+    
+    // Update button states
+    if (prevBtn) {
+        prevBtn.disabled = pageIndex === 0;
+    }
+    if (nextBtn) {
+        nextBtn.disabled = pageIndex === totalPages - 1;
+    }
+    
+    currentPage = pageIndex;
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function initPageNavigation() {
+    // Set up indicator clicks
+    const indicators = document.querySelectorAll('.indicator');
+    indicators.forEach((indicator) => {
+        indicator.addEventListener('click', function() {
+            const page = parseInt(this.getAttribute('data-page'));
+            goToPage(page);
+        });
+    });
+    
+    // Set up nav menu clicks
+    const navLinks = document.querySelectorAll('.nav-page-link');
+    navLinks.forEach((link) => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const page = parseInt(this.getAttribute('data-page'));
+            goToPage(page);
+            
+            // Close mobile nav
+            document.getElementById('navMenu').classList.remove('active');
+        });
+    });
+    
+    // Initialize button states
+    goToPage(0);
+}
+
+// Keyboard navigation
+function handleKeyboardNav(event) {
+    if (event.key === 'ArrowRight') {
+        navigatePage(1);
+    } else if (event.key === 'ArrowLeft') {
+        navigatePage(-1);
+    }
+}
+
 // Navigation
 function toggleNav() {
     document.getElementById('navMenu').classList.toggle('active');
@@ -326,6 +415,10 @@ document.addEventListener('DOMContentLoaded', function() {
     applyContent();
     setCurrentYear();
     initSmoothScroll();
+    initPageNavigation();
+    
+    // Add keyboard navigation
+    document.addEventListener('keydown', handleKeyboardNav);
     
     window.addEventListener('scroll', handleScroll);
     handleScroll();

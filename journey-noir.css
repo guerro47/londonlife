@@ -1,0 +1,664 @@
+/* ============================================================
+   LONDON NOIR CINEMATIC — Journey Book Design
+   Layered over landing.css to deliver the noir aesthetic.
+   All green (#2e8b57) replaced by noir gold (#c8a96e).
+   ============================================================ */
+
+/* ==========================================
+   COLOUR SYSTEM — Override landing.css vars
+   ========================================== */
+:root {
+    --primary-green:       #c8a96e;
+    --primary-green-light: #e8c87a;
+    --primary-green-dark:  #8a6830;
+    --accent-green:        #d4af37;
+
+    --primary-dark:    #080808;
+    --secondary-dark:  #101010;
+    --tertiary-dark:   #181818;
+    --card-dark:       #121212;
+
+    --gold-primary: #c8a96e;
+    --gold-bright:  #e8c87a;
+    --gold-deep:    #8a6830;
+    --gold-foil:    #d4af37;
+
+    --text-light: #f0ece4;
+    --text-muted: #888880;
+    --text-dim:   #484844;
+
+    --gradient-green:       linear-gradient(135deg, #c8a96e, #8a6830);
+    --gradient-green-light: linear-gradient(135deg, #e8c87a, #c8a96e);
+    --shadow-green-glow:    0 0 60px rgba(200,169,110,0.22);
+    --shadow-green-soft:    0 0 30px rgba(200,169,110,0.14);
+    --shadow-soft:          0 10px 40px rgba(0,0,0,0.7);
+
+    /* Unique noir tokens */
+    --gradient-noir-vignette: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.75) 100%);
+}
+
+/* ==========================================
+   BODY — noir background noise
+   ========================================== */
+body {
+    background-color: var(--primary-dark);
+    background-image:
+        radial-gradient(ellipse at 18% 55%, rgba(200,169,110,0.025) 0%, transparent 50%),
+        radial-gradient(ellipse at 82% 18%, rgba(60,90,140,0.035) 0%, transparent 50%);
+}
+
+/* ==========================================
+   ATMOSPHERE OVERLAYS
+   (divs injected by index.html)
+   ========================================== */
+
+/* Falling rain streaks */
+.noir-rain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image: repeating-linear-gradient(
+        -72deg,
+        transparent 0px, transparent 3px,
+        rgba(140,190,255,0.028) 3px, rgba(140,190,255,0.028) 4px
+    );
+    background-size: 55px 55px;
+    animation: noirRainFall 0.65s linear infinite;
+}
+
+@keyframes noirRainFall {
+    0%   { background-position: 0 0; }
+    100% { background-position: 28px 80px; }
+}
+
+/* Film grain flicker */
+.film-grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.032;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: noirGrainFlicker 0.09s steps(1) infinite;
+}
+
+@keyframes noirGrainFlicker {
+    0%   { background-position: 0 0;       opacity: 0.032; }
+    25%  { background-position: 100px 50px; opacity: 0.038; }
+    50%  { background-position: 50px 150px; opacity: 0.026; }
+    75%  { background-position: 150px 100px;opacity: 0.040; }
+}
+
+/* Bottom fog / mist */
+.noir-fog {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 32vh;
+    pointer-events: none;
+    z-index: 1;
+    background: linear-gradient(
+        0deg,
+        rgba(140,160,185,0.055) 0%,
+        rgba(120,140,165,0.025) 40%,
+        transparent 100%
+    );
+    animation: noirFogDrift 12s ease-in-out infinite alternate;
+}
+
+@keyframes noirFogDrift {
+    0%   { opacity: 0.7; transform: translateX(0); }
+    100% { opacity: 1.0; transform: translateX(12px); }
+}
+
+/* ==========================================
+   LONDON SKYLINE SILHOUETTE
+   Sits at the bottom of every .book-page
+   ========================================== */
+.london-skyline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 140px;
+    pointer-events: none;
+    z-index: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 140' preserveAspectRatio='xMidYMax meet'%3E%3Cpath fill='%23ffffff' opacity='0.055' d='M0,140 L0,90 L30,90 L30,75 L50,75 L50,55 L55,50 L55,20 L58,14 L61,20 L61,50 L66,55 L66,75 L86,75 L86,90 L120,90 L120,100 L135,100 L135,78 L145,78 L145,100 L175,100 L175,90 L215,90 L215,78 L235,78 L235,90 L275,90 L275,62 L285,58 L285,22 L290,14 L295,22 L295,58 L305,62 L305,90 L355,90 L355,80 L395,80 L395,98 L415,98 L415,82 L425,82 L425,60 L432,50 L439,60 L439,82 L449,82 L449,98 L490,98 L490,70 L500,68 L500,12 L505,5 L510,12 L510,68 L520,70 L520,98 L545,98 L545,82 L565,82 L565,98 L605,98 L605,88 L645,88 L645,68 L656,62 L656,44 L662,37 L668,44 L668,62 L679,68 L679,88 L710,88 L710,98 L740,98 L740,78 L752,72 L752,55 L760,46 L768,55 L768,72 L780,78 L780,98 L818,98 L818,82 L838,82 L838,60 L846,52 L854,60 L854,82 L874,82 L874,98 L908,98 L908,88 L928,88 L928,72 L938,66 L948,72 L948,88 L975,88 L975,78 L1012,78 L1012,88 L1042,88 L1042,72 L1056,56 L1056,22 L1062,10 L1068,22 L1068,56 L1082,72 L1082,88 L1112,88 L1112,98 L1148,98 L1148,88 L1190,88 L1190,100 L1220,100 L1220,85 L1250,85 L1250,70 L1265,65 L1280,70 L1280,85 L1310,85 L1310,100 L1350,100 L1350,88 L1390,88 L1390,100 L1440,100 L1440,140 Z'/%3E%3C/svg%3E") bottom center / cover no-repeat;
+}
+
+/* ==========================================
+   SPLASH SCREEN
+   ========================================== */
+.splash-tagline           { color: var(--gold-primary); }
+.splash-loader            { background: rgba(200,169,110,0.15); }
+.loader-bar               { background: var(--gradient-green); }
+
+.logo-container::before {
+    background: radial-gradient(circle, rgba(200,169,110,0.22) 0%, transparent 70%);
+}
+
+.splash-logo {
+    box-shadow: 0 0 0 3px rgba(200,169,110,0.3), 0 0 40px rgba(200,169,110,0.14);
+    border: 3px solid rgba(200,169,110,0.35);
+}
+
+/* ==========================================
+   DEMO TOAST
+   ========================================== */
+.toast-content {
+    border: 2px solid rgba(200,169,110,0.35);
+    box-shadow: 0 25px 80px rgba(0,0,0,0.7), var(--shadow-green-glow);
+}
+.toast-content::before          { background: var(--gradient-green); }
+.toast-close:hover              { color: var(--gold-primary); background: rgba(200,169,110,0.08); }
+.toast-icon                     { background: var(--gradient-green); box-shadow: var(--shadow-green-soft); }
+.toast-message strong           { color: var(--gold-primary); }
+.toast-signature {
+    color: var(--gold-primary);
+    background: rgba(200,169,110,0.08);
+    border: 1px solid rgba(200,169,110,0.2);
+}
+
+/* ==========================================
+   NAVIGATION
+   ========================================== */
+.landing-nav {
+    border: 1px solid rgba(200,169,110,0.12);
+}
+.landing-nav.scrolled {
+    border-color: rgba(200,169,110,0.28);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+}
+.nav-logo-img             { border: 2px solid rgba(200,169,110,0.38); }
+.nav-menu a::after        { background: var(--gold-primary); }
+.nav-menu a:hover         { color: var(--gold-primary); }
+.nav-cta                  { background: var(--gradient-green) !important; }
+.nav-cta:hover            { box-shadow: var(--shadow-green-soft) !important; }
+
+/* Page indicators — gold dashes instead of dots */
+.indicator {
+    width: 18px;
+    height: 3px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.18);
+    border: none;
+    transition: all 0.3s ease;
+}
+.indicator:hover {
+    background: rgba(200,169,110,0.45);
+    transform: scaleX(1.25);
+}
+.indicator.active {
+    background: var(--gold-primary);
+    border: none;
+    width: 28px;
+    transform: scaleX(1);
+    box-shadow: 0 0 8px rgba(200,169,110,0.5);
+}
+
+/* Book nav buttons */
+.book-nav-btn {
+    background: var(--gradient-green);
+    box-shadow: 0 4px 20px rgba(200,169,110,0.28);
+}
+.book-nav-btn:hover        { box-shadow: 0 8px 30px rgba(200,169,110,0.48); }
+.book-nav-btn.prev-btn {
+    background: linear-gradient(135deg, #1c1c1c, #282828);
+    border: 1px solid rgba(200,169,110,0.25);
+}
+
+/* ==========================================
+   HERO SECTION — NOIR CINEMATIC
+   ========================================== */
+
+/* Dark atmospheric overlay replacing green radials */
+.hero-overlay {
+    background:
+        radial-gradient(ellipse at 28% 62%, rgba(200,169,110,0.04) 0%, transparent 45%),
+        radial-gradient(ellipse at 72% 22%, rgba(55,85,135,0.06) 0%, transparent 42%),
+        linear-gradient(180deg, rgba(8,8,8,0.88) 0%, rgba(8,8,8,0.96) 100%);
+}
+
+/* Cinematic top bar */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 90px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Gold dust particles replace green sparks */
+.hero-particles {
+    background-image:
+        radial-gradient(1px 1px at 140px 80px,  rgba(200,169,110,0.45), transparent),
+        radial-gradient(1px 1px at 480px 200px, rgba(200,169,110,0.22), transparent),
+        radial-gradient(2px 2px at 240px 340px, rgba(255,255,255,0.14), transparent),
+        radial-gradient(1px 1px at 680px 130px, rgba(200,169,110,0.32), transparent),
+        radial-gradient(1px 1px at 880px 280px, rgba(140,185,255,0.10), transparent),
+        radial-gradient(1px 1px at 320px 420px, rgba(200,169,110,0.18), transparent);
+    background-size: 1100px 600px;
+}
+
+/* Cinzel gold title treatment */
+.hero-title {
+    font-family: 'Cinzel', 'Playfair Display', serif;
+    letter-spacing: 0.1em;
+}
+.hero-title span {
+    color: var(--text-light);
+}
+.hero-title span:first-child {
+    background: linear-gradient(135deg, #e8e0d0 20%, #c8a96e 50%, #e8e0d0 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: noirTitleFlicker 14s ease-in-out infinite;
+}
+
+@keyframes noirTitleFlicker {
+    0%,   93%, 100% { opacity: 1; }
+    94%             { opacity: 0.82; }
+    95%             { opacity: 1; }
+    97%             { opacity: 0.88; }
+}
+
+.hero-subtitle {
+    color: var(--gold-primary);
+    font-family: 'Special Elite', 'Montserrat', cursive;
+    letter-spacing: 0.28em;
+}
+
+/* Logo gold ring */
+.hero-logo {
+    box-shadow: 0 0 0 3px rgba(200,169,110,0.38), 0 0 30px rgba(200,169,110,0.18);
+    border: 3px solid rgba(200,169,110,0.45);
+}
+
+/* Buttons */
+.btn-primary {
+    background: var(--gradient-green);
+    box-shadow: 0 4px 20px rgba(200,169,110,0.22);
+}
+.btn-primary:hover { box-shadow: 0 15px 40px rgba(200,169,110,0.38); }
+.btn-secondary {
+    color: var(--gold-primary);
+    border: 2px solid rgba(200,169,110,0.55);
+}
+.btn-secondary:hover {
+    background: var(--gold-primary);
+    color: #111108;
+}
+
+/* Coming-soon badge */
+.coming-soon-badge {
+    background: rgba(200,169,110,0.07);
+    border: 1px solid rgba(200,169,110,0.24);
+    color: var(--gold-primary);
+    animation: noirGoldPulse 3s ease-in-out infinite;
+}
+@keyframes noirGoldPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(200,169,110,0.38); }
+    50%       { box-shadow: 0 0 0 12px rgba(200,169,110,0); }
+}
+
+/* Book container float override (gentler) */
+.book-container { animation: noirBookFloat 7s ease-in-out infinite; }
+@keyframes noirBookFloat {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50%       { transform: translateY(-18px) rotate(1deg); }
+}
+
+/* Glow behind book — gold */
+.book-glow {
+    background: radial-gradient(ellipse, rgba(200,169,110,0.18) 0%, transparent 70%);
+}
+
+/* Fallback flat book image (shown only if WebGL fails) */
+.book-cover-fallback {
+    width: 340px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 50px rgba(200,169,110,0.18);
+    border: 2px solid rgba(200,169,110,0.28);
+}
+
+/* Three.js canvas container */
+#bookCanvas {
+    width: 380px;
+    height: 520px;
+    display: block;
+    border-radius: 6px;
+}
+
+/* Featured book label */
+.featured-book-label { color: var(--gold-primary); }
+
+/* ==========================================
+   SECTION TAGS (all sections)
+   ========================================== */
+.section-tag {
+    color: var(--gold-primary);
+    background: rgba(200,169,110,0.07);
+    border: 1px solid rgba(200,169,110,0.18);
+    font-family: 'Special Elite', 'Montserrat', cursive;
+    letter-spacing: 0.38em;
+}
+
+/* ==========================================
+   ABOUT SECTION
+   ========================================== */
+.about-section { background: var(--secondary-dark); }
+.about-section::before {
+    background: radial-gradient(ellipse at center, rgba(200,169,110,0.035) 0%, transparent 70%);
+}
+.about-intro::before  { border: 2px solid rgba(200,169,110,0.07); }
+
+.about-intro-content .about-lead {
+    font-family: 'Special Elite', Georgia, serif;
+    font-size: 1.35rem;
+    color: var(--text-light);
+}
+
+.feature {
+    background: var(--card-dark);
+    border: 1px solid rgba(200,169,110,0.11);
+}
+.feature:hover {
+    border-color: var(--gold-primary);
+    box-shadow: var(--shadow-green-soft);
+}
+.feature i { color: var(--gold-primary); }
+
+.about-logo {
+    box-shadow: var(--shadow-green-glow), 0 30px 60px rgba(0,0,0,0.5);
+    border: 2px solid rgba(200,169,110,0.22);
+}
+
+/* ==========================================
+   BOOKS SECTION
+   ========================================== */
+.books-section::before {
+    background: radial-gradient(ellipse at center, rgba(200,169,110,0.035) 0%, transparent 60%);
+}
+.featured-book-card {
+    background: var(--card-dark);
+    border: 1px solid rgba(200,169,110,0.09);
+}
+.featured-book-card::before {
+    background: radial-gradient(circle, rgba(200,169,110,0.055) 0%, transparent 70%);
+}
+
+/* Vertical gold divider (desktop only) */
+.featured-book-card::after {
+    content: '';
+    position: absolute;
+    left: 430px;
+    top: 8%;
+    height: 84%;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, rgba(200,169,110,0.28), transparent);
+}
+@media (max-width: 1024px) {
+    .featured-book-card::after { display: none; }
+}
+
+.featured-book-image img {
+    box-shadow: 0 30px 70px rgba(0,0,0,0.6), var(--shadow-green-soft);
+    border: 1px solid rgba(200,169,110,0.18);
+}
+
+.book-badge {
+    background: var(--gradient-green);
+    box-shadow: 0 5px 20px rgba(200,169,110,0.32);
+}
+.book-category {
+    color: var(--gold-primary);
+    font-family: 'Special Elite', monospace;
+    letter-spacing: 0.22em;
+}
+.book-rating .stars { color: var(--gold-bright); }
+
+.coming-soon-card {
+    background: rgba(200,169,110,0.025);
+    border: 2px dashed rgba(200,169,110,0.2);
+}
+.coming-soon-card:hover {
+    border-color: var(--gold-primary);
+    background: rgba(200,169,110,0.055);
+}
+.coming-icon {
+    background: var(--gradient-green);
+    box-shadow: var(--shadow-green-soft);
+}
+
+/* ==========================================
+   EXCERPT / QUOTE SECTION
+   ========================================== */
+.excerpt-section { background: var(--secondary-dark); }
+.excerpt-section::before {
+    background:
+        linear-gradient(135deg, rgba(200,169,110,0.025) 0%, transparent 50%),
+        linear-gradient(225deg, rgba(200,169,110,0.025) 0%, transparent 50%);
+}
+.excerpt-card {
+    background: var(--card-dark);
+    border: 1px solid rgba(200,169,110,0.14);
+}
+.excerpt-card::before {
+    background: var(--gradient-green);
+    opacity: 0.18;
+}
+.excerpt-quote {
+    color: var(--gold-primary);
+    text-shadow: 0 0 28px rgba(200,169,110,0.25);
+}
+.excerpt-card cite {
+    color: var(--gold-primary);
+    font-family: 'Special Elite', serif;
+}
+
+/* ==========================================
+   AUTHOR SECTION — NOIR PORTRAIT
+   ========================================== */
+.author-section::before {
+    background: radial-gradient(ellipse at center, rgba(200,169,110,0.04) 0%, transparent 70%);
+}
+.author-image::before { border: 2px solid rgba(200,169,110,0.22); }
+
+/* Vignette overlay on author photo */
+.author-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    background: var(--gradient-noir-vignette);
+    pointer-events: none;
+    opacity: 0.45;
+}
+.author-image img {
+    box-shadow: 0 30px 70px rgba(0,0,0,0.6);
+    border: 2px solid rgba(200,169,110,0.14);
+}
+
+.social-btn              { border: 2px solid rgba(200,169,110,0.2); }
+.social-btn:hover {
+    background: var(--gold-primary);
+    border-color: var(--gold-primary);
+    box-shadow: var(--shadow-green-soft);
+}
+
+/* ==========================================
+   REVIEWS — PRESS CLIPPING AESTHETIC
+   ========================================== */
+.reviews-section { background: var(--secondary-dark); }
+
+/* Light newspaper-clipping cards on the dark page */
+.review-card {
+    background: #f2e9d6;
+    color: #1a1a12;
+    border: none;
+    border-radius: 3px;
+    box-shadow:
+        4px 6px 22px rgba(0,0,0,0.45),
+        0  2px  6px rgba(0,0,0,0.28);
+    font-family: 'Special Elite', Georgia, serif;
+    padding: 2.2rem;
+    position: relative;
+    overflow: visible;
+}
+
+/* Gold rule at top of each clipping */
+.review-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--gradient-green);
+    border-radius: 0;
+}
+
+/* Torn-tape effect: top-right corner */
+.review-card::after {
+    content: '';
+    position: absolute;
+    top: -10px; right: 16px;
+    width: 40px; height: 18px;
+    background: rgba(200,169,110,0.45);
+    transform: rotate(-3deg);
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Alternating slight rotations for organic feel */
+.review-card:nth-child(1) { transform: rotate(-1.8deg) translateY(0); }
+.review-card:nth-child(2) { transform: rotate(1.2deg)  translateY(28px); }
+.review-card:nth-child(3) { transform: rotate(-0.6deg) translateY(0); }
+
+.review-card:hover {
+    transform: rotate(0deg) translateY(-10px) scale(1.025) !important;
+    box-shadow: 6px 22px 45px rgba(0,0,0,0.55) !important;
+    z-index: 20;
+}
+
+.review-stars    { color: #b8902a; margin-bottom: 1rem; }
+.review-text {
+    color: #2a2a1a;
+    font-family: 'Special Elite', Georgia, serif;
+    font-size: 0.93rem;
+    line-height: 1.85;
+    font-style: italic;
+}
+.reviewer-name {
+    color: #1a1a12;
+    font-weight: 700;
+    font-family: 'Special Elite', monospace;
+    letter-spacing: 0.04em;
+    border-top: 1px solid rgba(0,0,0,0.14);
+    padding-top: 0.8rem;
+    margin-top: 1rem;
+    display: block;
+}
+.review-source {
+    color: #8a6830;
+    font-size: 0.78rem;
+    font-family: 'Special Elite', monospace;
+    letter-spacing: 0.06em;
+}
+
+/* ==========================================
+   BUY SECTION — CINEMATIC POSTER
+   ========================================== */
+.buy-section {
+    background: linear-gradient(180deg, var(--primary-dark) 0%, #0c0c0c 100%);
+}
+.buy-section::before {
+    background: radial-gradient(ellipse at 50% 0%, rgba(200,169,110,0.05) 0%, transparent 60%);
+}
+.buy-book img {
+    box-shadow: 0 30px 70px rgba(0,0,0,0.55), var(--shadow-green-soft);
+    border: 1px solid rgba(200,169,110,0.14);
+}
+.price-value {
+    color: var(--gold-bright);
+    font-family: 'Cinzel', 'Playfair Display', serif;
+    text-shadow: 0 0 22px rgba(200,169,110,0.28);
+}
+.buy-btn.barnes        { background: var(--gradient-green); }
+.buy-btn.direct        { border: 2px solid rgba(200,169,110,0.45); }
+.buy-feature i         { color: var(--gold-primary); }
+
+/* ==========================================
+   NEWSLETTER
+   ========================================== */
+.newsletter-card {
+    background: var(--card-dark);
+    border: 1px solid rgba(200,169,110,0.13);
+}
+.newsletter-card::before          { background: var(--gradient-green); }
+.newsletter-form input            { border: 2px solid rgba(200,169,110,0.2); }
+.newsletter-form input:focus {
+    border-color: var(--gold-primary);
+    box-shadow: var(--shadow-green-soft);
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+.landing-footer             { border-top: 1px solid rgba(200,169,110,0.09); }
+.footer-logo                { border: 2px solid rgba(200,169,110,0.28); }
+.footer-brand p             { color: var(--gold-primary); }
+.footer-social a            { border: 1px solid rgba(200,169,110,0.14); }
+.footer-social a:hover      { background: var(--gold-primary); border-color: var(--gold-primary); }
+.footer-links a:hover       { color: var(--gold-primary); }
+.footer-contact i           { color: var(--gold-primary); }
+.footer-credit              { color: var(--gold-primary); }
+
+/* ==========================================
+   BACK TO TOP
+   ========================================== */
+.back-to-top {
+    background: var(--gradient-green);
+    box-shadow: var(--shadow-green-soft);
+}
+.back-to-top:hover { box-shadow: 0 15px 40px rgba(200,169,110,0.38); }
+
+/* ==========================================
+   BOOK PAGE BACKGROUNDS
+   ========================================== */
+.book-page { background: var(--primary-dark); }
+
+/* ==========================================
+   MOBILE — responsive tweaks
+   ========================================== */
+@media (max-width: 768px) {
+    #bookCanvas {
+        width: 280px;
+        height: 385px;
+    }
+    .book-cover-fallback { width: 260px; }
+
+    .nav-menu {
+        border: 1px solid rgba(200,169,110,0.18);
+    }
+
+    .review-card:nth-child(1),
+    .review-card:nth-child(2),
+    .review-card:nth-child(3) {
+        transform: rotate(0deg) translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    #bookCanvas {
+        width: 240px;
+        height: 330px;
+    }
+}

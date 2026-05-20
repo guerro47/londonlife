@@ -662,3 +662,109 @@ body {
         height: 330px;
     }
 }
+
+/* ==========================================
+   MOSCOW LIFE — COMING SOON CARD
+   ========================================== */
+.moscow-card {
+    background: linear-gradient(145deg, #0e0c0a 0%, #1a1510 50%, #0e0c0a 100%);
+    border: 1px solid rgba(200,169,110,0.28) !important;
+    box-shadow:
+        0 0 0 1px rgba(200,169,110,0.08),
+        0 20px 60px rgba(0,0,0,0.5),
+        inset 0 1px 0 rgba(200,169,110,0.12);
+    padding: 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle radial spotlight */
+.moscow-card::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(200,169,110,0.07) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/* Red accent stripe — nod to Moscow/Russia */
+.moscow-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(180,30,30,0.7) 20%,
+        rgba(200,169,110,0.8) 50%,
+        rgba(180,30,30,0.7) 80%,
+        transparent 100%
+    );
+}
+
+.moscow-series-label {
+    display: inline-block;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.45em;
+    color: rgba(200,169,110,0.6);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.moscow-card h4 {
+    font-family: 'Cinzel', 'Playfair Display', serif !important;
+    font-size: 2.2rem !important;
+    background: linear-gradient(135deg, #f0ece4 20%, #c8a96e 55%, #f0ece4 85%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.75rem;
+}
+
+.moscow-tagline {
+    font-family: 'Special Elite', Georgia, serif !important;
+    font-size: 1.05rem !important;
+    color: rgba(200,169,110,0.75) !important;
+    font-style: italic;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.04em;
+}
+
+.moscow-card p {
+    color: var(--text-muted) !important;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    max-width: 420px;
+    margin: 0 auto 1.5rem;
+}
+
+.moscow-card p em {
+    color: var(--gold-primary);
+    font-style: italic;
+}
+
+.moscow-coming-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.55rem 1.4rem;
+    background: rgba(200,169,110,0.07);
+    border: 1px solid rgba(200,169,110,0.28);
+    border-radius: 50px;
+    color: var(--gold-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    animation: noirGoldPulse 3s ease-in-out infinite;
+}
